@@ -90,6 +90,13 @@
                         </div>
                       </div>
                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Cedula o pasaporte <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="txtIdentificacion" required="required" class="form-control col-md-7 col-xs-12">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de nacimiento </span></label>
                         <div class="col-md-6 xdisplay_inputx form-group has-feedback">
                           <input type="text" class="form-control has-feedback-left" id="single_cal2" aria-describedby="txtFechaNacimiento">
@@ -203,6 +210,14 @@
                         </div>
                       </div>
                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de inscripcion </label>
+                        <div class="col-md-6 xdisplay_inputx form-group has-feedback">
+                          <input type="text" class="form-control has-feedback-left" id="single_cal4" aria-describedby="txtFechaInscripcion">
+                          <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                          <span id="txtFechaInscripcion" class="sr-only">(success)</span>
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" id="btnTipo" required="required" data-toggle="buttons">
@@ -262,14 +277,6 @@
                         </div>
                       </div> 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de inscripcion </label>
-                        <div class="col-md-6 xdisplay_inputx form-group has-feedback">
-                          <input type="text" class="form-control has-feedback-left" id="single_cal1" aria-describedby="txtFechaInscripcion">
-                          <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                          <span id="txtFechaInscripcion" class="sr-only">(success)</span>
-                        </div>
-                      </div>
-                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de promesa </label>
                         <div class="col-md-6 xdisplay_inputx form-group has-feedback">
                           <input type="text" class="form-control has-feedback-left" id="single_cal3" aria-describedby="txtFechaPromesa">
@@ -323,7 +330,94 @@
                       </div>
                     </form>
                   </div>
-                </div>
+                  <div class="x_title">
+                    <h2>Informacion del adulto responsable<small></small></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Nombre <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="txtNombreResponsable" required="required" class="form-control col-md-7 col-xs-12">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Primer Apellido <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="txtPrimerApellidoResponsable" required="required" class="form-control col-md-7 col-xs-12">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Segundo Apellido <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="txtSegundoApellidoResponsable" required="required" class="form-control col-md-7 col-xs-12">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Correo <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="txtCorreoResponsable" required="required" class="form-control col-md-7 col-xs-12">
+                          <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Telefono <span class="required">*</span></label></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="txtTelefonoResponsable" required="required" class="form-control" data-inputmask="'mask' : '(999) 999-9999'">
+                          <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-0 col-sm-3 col-xs-12">Direccion </label>
+                        <label class="control-label col-md-1 col-sm-3 col-xs-12">Provincia </label>
+                        <div class="col-md-1 col-sm-6 col-xs-12">
+                          <select class="form-control" id="cbProvinciaResponsable">
+                            <option>San Jose</option>
+                            <option>Cartago</option>
+                            <option>Alajuela</option>
+                            <option>Heredia</option>
+                            <option>Guanacaste</option>
+                            <option>Puntarenas</option>
+                            <option>Limon</option>
+                          </select>
+                        </div>
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Canton </label>
+                        <div class="col-md-1 col-sm-6 col-xs-12">
+                          <select class="form-control" id="cbCantonResponsable">
+                            <option>Canton 1</option>
+                            <option>Canton 2</option>
+                            <option>Canton 3</option>
+                          </select>
+                        </div>
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">Distrito </label>
+                        <div class="col-md-1 col-sm-6 col-xs-12">
+                          <select class="form-control" id="cbDistritoResponsable">
+                            <option>Distrito 1</option>
+                            <option>Distrito 2</option>
+                            <option>Distrito 3</option>
+                          </select>
+                        </div>
+                        <label class="control-label col-md-4 col-sm-3 col-xs-12" for="Nombre">Detalle <span class="required">*</span></label>
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                          <textarea id="txtDireccionResponsable" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                            data-parsley-validation-threshold="10"></textarea>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button class="btn btn-primary" type="reset">Borrar</button>
+                          <button type="submit" class="btn btn-success">Agregar</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>        
               </div>
             </div>
 
@@ -348,14 +442,6 @@
                           </select>
                         </div>
                       </div> 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de inscripcion como adulto</label>
-                        <div class="col-md-6 xdisplay_inputx form-group has-feedback">
-                          <input type="text" class="form-control has-feedback-left" id="single_cal4" aria-describedby="txtFechaInscripcionAdulto">
-                          <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                          <span id="txtFechaInscripcionAdulto" class="sr-only">(success)</span>
-                        </div>
-                      </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

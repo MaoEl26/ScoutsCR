@@ -15,8 +15,21 @@
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="../vendors/starrr/dist/starrr.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -127,7 +140,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Enfermedad </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbEnfermedad0">
+                          <select class="form-control" id="cbEnfermedad">
                             <option>Enfermedad 1</option>
                             <option>Enfermedad 2</option>
                             <option>Enfermedad 3</option>
@@ -137,7 +150,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Medicamento </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbMedicamento0">
+                          <select class="form-control" id="cbMedicamento">
                             <option>Medicamento 1</option>
                             <option>Medicamento 2</option>
                             <option>Medicamento 3</option>
@@ -147,7 +160,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Dosis </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="txtDosis0" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="txtDosis" class="form-control col-md-7 col-xs-12">
                         </div>    
                       </div>                
                       <div class="ln_solid"></div>
@@ -168,27 +181,99 @@
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
+                      <div class="panel-body">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Tipo</th>
+                              <th>Detalle</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Alimento</td>
+                              <td>Tomate</td>
+                            </tr>
+                            <tr>
+                              <td>Medicamento</td>
+                              <td>Ibuprofeno</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>                 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Alergia a medicamentos </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de alergia </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="checkbox" class="js-switch" checked /> 
-                        </div>
-                      </div>                    
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de sangre </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbSangre">
-                            <option>A-</option>
-                            <option>A+</option>
-                            <option>B-</option>
-                            <option>B+</option>
-                            <option>O-</option>
-                            <option>O+</option>
-                            <option>AB-</option>
-                            <option>AB+</option>
+                          <select class="form-control" id="cbTipoAlergia">
+                            <option>Alimento</option>
+                            <option>Medicamento</option>
+                            <option>Picadura</option>
                           </select>
                         </div>
                       </div> 
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Detalle </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="txtDetalle" class="form-control col-md-7 col-xs-12">
+                        </div>    
+                      </div>                
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button class="btn btn-primary" type="reset">Borrar</button>
+                          <button type="submit" class="btn btn-success">Agregar</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Vacunas<small></small></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
+                      <div class="panel-body">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Vacuna</th>
+                              <th>Fecha</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Tetano</td>
+                              <td>13/03/2019</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>                 
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Vacuna </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="form-control" id="cbVacuna">
+                            <option>Tetano</option>
+                          </select>
+                        </div>
+                      </div> 
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de vacunacion </span></label>
+                        <div class="col-md-6 xdisplay_inputx form-group has-feedback">
+                          <input type="text" class="form-control has-feedback-left" id="single_cal2" aria-describedby="txtFechaVacunacion">
+                          <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                          <span id="txtFechaVacunacion" class="sr-only">(success)</span>
+                        </div>
+                      </div>              
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button class="btn btn-primary" type="reset">Borrar</button>
+                          <button type="submit" class="btn btn-success">Agregar</button>
+                        </div>
+                      </div>
                     </form>
                   </div>
                 </div>

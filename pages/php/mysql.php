@@ -28,6 +28,31 @@ switch ($opcion) {
 		if($mysqli) $mysqli->close();
 		echo "Enfermedad agregada";
 	break;
+
+	case  'cargarEnfermedades':
+		$resultado = $mysqli->query("CALL cargarEnfermedades()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'editarEnfermedad':
+		$id = $_POST['id'];
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL editarEnfermedad (@id,@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la enfermedad ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Enfermedad actualizada";
+	break;
+
 	default:
 		# code...
 		break;

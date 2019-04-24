@@ -43,15 +43,9 @@ function agregarEnfermedad(){
 		var post = $.post(
 	                          "php/mysql.php",    // Script que se ejecuta en el servidor
 		                      parametros,    	                       
-		                      siRespuestaagregarEnfermedad    // Función que se ejecuta cuando el servidor responde
+		                      siRespuestaEnfermedad    // Función que se ejecuta cuando el servidor responde
 	                          );
 	}
-}
-
-function siRespuestaagregarEnfermedad(r){
-	limpiar();
-	cargarEnfermedades();
-	alert(r);
 }
 
 function limpiar(){
@@ -60,23 +54,27 @@ function limpiar(){
 }
 
 function editarEnfermedad(){
-    var id = arrayEnfermedad[document.getElementById('cbEnfermedad').selectedIndex];
-    console.log(id);
-    var parametros = {
-        opcion : "editarEnfermedad",
-        id : id,
-        txtNombre: $('#txtNombreMod').val(),
-    };
+	if (document.getElementById('txtNombreMod').value == "") {
+		alert('El nombre actualizado de la enfermedad es requerido');
+	}else{
+	    var id = arrayEnfermedad[document.getElementById('cbEnfermedad').selectedIndex];
+	    console.log(id);
+	    var parametros = {
+	        opcion : "editarEnfermedad",
+	        id : id,
+	        txtNombre: $('#txtNombreMod').val(),
+	    };
 
-    // Realizar la petición
-    var post = $.post(
-                          "php/mysql.php",    // Script que se ejecuta en el servidor
-                          parametros,                              
-                          siRespuestaeditarEnfermedad    // Función que se ejecuta cuando el servidor responde
-                          );  
+	    // Realizar la petición
+	    var post = $.post(
+	                          "php/mysql.php",    // Script que se ejecuta en el servidor
+	                          parametros,                              
+	                          siRespuestaEnfermedad    // Función que se ejecuta cuando el servidor responde
+	                          );  
+	}
 }
 
-function siRespuestaeditarEnfermedad(r){
+function siRespuestaEnfermedad(r){
     limpiar();
     alert(r);
     cargarEnfermedades();

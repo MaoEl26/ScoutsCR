@@ -43,15 +43,9 @@ function agregarAlergia(){
 		var post = $.post(
 	                          "php/mysql.php",    // Script que se ejecuta en el servidor
 		                      parametros,    	                       
-		                      siRespuestaagregarAlergia    // Función que se ejecuta cuando el servidor responde
+		                      siRespuestaAlergia    // Función que se ejecuta cuando el servidor responde
 	                          );
 	}
-}
-
-function siRespuestaagregarAlergia(r){
-	limpiar();
-	cargarAlergias();
-	alert(r);
 }
 
 function limpiar(){
@@ -60,23 +54,27 @@ function limpiar(){
 }
 
 function editarAlergia(){
-    var id = arrayAlergia[document.getElementById('cbAlergia').selectedIndex];
-    console.log(id);
-    var parametros = {
-        opcion : "editarAlergia",
-        id : id,
-        txtNombre: $('#txtNombreMod').val(),
-    };
+	if (document.getElementById('txtNombreMod').value == "") {
+		alert('El nombre actualizado de la alergia es requerido');
+	}else{	
+	    var id = arrayAlergia[document.getElementById('cbAlergia').selectedIndex];
+	    console.log(id);
+	    var parametros = {
+	        opcion : "editarAlergia",
+	        id : id,
+	        txtNombre: $('#txtNombreMod').val(),
+	    };
 
-    // Realizar la petición
-    var post = $.post(
-                          "php/mysql.php",    // Script que se ejecuta en el servidor
-                          parametros,                              
-                          siRespuestaeditarAlergia    // Función que se ejecuta cuando el servidor responde
-                          );  
+	    // Realizar la petición
+	    var post = $.post(
+	                          "php/mysql.php",    // Script que se ejecuta en el servidor
+	                          parametros,                              
+	                          siRespuestaAlergia    // Función que se ejecuta cuando el servidor responde
+	                          ); 
+	} 
 }
 
-function siRespuestaeditarAlergia(r){
+function siRespuestaAlergia(r){
     limpiar();
     alert(r);
     cargarAlergias();

@@ -1,41 +1,41 @@
 $( document ).ready(function() {
-    cargarEnfermedades();
+    cargarMedicamentos();
 });
 
-var arrayEnfermedad = [];
+var arrayMedicamentos = [];
 
-function cargarEnfermedades(){
+function cargarMedicamentos(){
 	var parametros = {
-		opcion : "cargarEnfermedades"
+		opcion : "cargarMedicamentos"
 	}
 
 	var post = $.post(
                          "php/mysql.php",    // Script que se ejecuta en el servidor
 	                     parametros,    	                       
-	                     siRespuestacargarEnfermedades    // Función que se ejecuta cuando el servidor responde
+	                     siRespuestacargarMedicamentos    // Función que se ejecuta cuando el servidor responde
                          );
 }
 
-function siRespuestacargarEnfermedades(r){
+function siRespuestacargarMedicamentos(r){
 	var doc = JSON.parse(r);
-	var salida = '<select class="form-control" tabindex="-1" id="cbEnfermedad">';                   
-	$("#cbEnfermedad").html("");
+	var salida = '<select class="form-control" tabindex="-1" id="cbMedicamentos">';                   
+	$("#cbMedicamentos").html("");
 	for (var i = 0; i < doc.length; i++) {
         var j = i;
         var obj = doc[i];
-        salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
-        arrayEnfermedad[i] = obj.idEnfermedad;
+        salida += '<option value="'+i+'">'+obj.Descripcion+'</option>';
+        arrayMedicamentos[i] = obj.idMedicamento;
     }
     salida += "</select>";
-    $("#cbEnfermedad").html(salida);
+    $("#cbMedicamentos").html(salida);
 }
 
-function agregarEnfermedad(){
+function agregarMedicamento(){
 	if (document.getElementById('txtNombre').value == "") {
-		alert('El nombre de la enfermedad es requerido');
+		alert('El nombre del medicamento es requerido');
 	}else{	
 		var parametros = {
-	        opcion : "agregarEnfermedad",
+	        opcion : "agregarMedicamento",
 	        txtNombre: $('#txtNombre').val(),
 	    };
 
@@ -43,7 +43,7 @@ function agregarEnfermedad(){
 		var post = $.post(
 	                          "php/mysql.php",    // Script que se ejecuta en el servidor
 		                      parametros,    	                       
-		                      siRespuestaEnfermedad    // Función que se ejecuta cuando el servidor responde
+		                      siRespuestaMedicamento    // Función que se ejecuta cuando el servidor responde
 	                          );
 	}
 }
@@ -53,14 +53,14 @@ function limpiar(){
 	document.getElementById('txtNombreMod').value = "";
 }
 
-function editarEnfermedad(){
+function editarMedicamento(){
 	if (document.getElementById('txtNombreMod').value == "") {
-		alert('El nombre actualizado de la enfermedad es requerido');
+		alert('El nombre actualizado del medicamento es requerido');
 	}else{
-	    var id = arrayEnfermedad[document.getElementById('cbEnfermedad').selectedIndex];
+	    var id = arrayMedicamentos[document.getElementById('cbMedicamentos').selectedIndex];
 	    console.log(id);
 	    var parametros = {
-	        opcion : "editarEnfermedad",
+	        opcion : "editarMedicamento",
 	        id : id,
 	        txtNombre: $('#txtNombreMod').val(),
 	    };
@@ -69,12 +69,12 @@ function editarEnfermedad(){
 	    var post = $.post(
 	                          "php/mysql.php",    // Script que se ejecuta en el servidor
 	                          parametros,                              
-	                          siRespuestaEnfermedad    // Función que se ejecuta cuando el servidor responde
+	                          siRespuestaMedicamento    // Función que se ejecuta cuando el servidor responde
 	                          );  
 	}
 }
 
-function siRespuestaEnfermedad(r){
+function siRespuestaMedicamento(r){
     limpiar();
     alert(r);
     cargarEnfermedades();

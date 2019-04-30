@@ -14,7 +14,7 @@ function cargarEspecialidades(){
 	                     parametros,    	                       
 	                     siRespuestacargarEspecialidades    // Función que se ejecuta cuando el servidor responde
                          );
-}
+ }
 
 function siRespuestacargarEspecialidades(r){
 	var doc = JSON.parse(r);
@@ -57,7 +57,7 @@ function editarEspecialidad(){
 	if (document.getElementById('txtNombreMod').value == "") {
 		alert('El nombre actualizado de la especialidad es requerido');
 	}else{
-	    var id = arrayEnfermedad[document.getElementById('cbEspecialidad').selectedIndex];
+	    var id = arrayEspecialidad[document.getElementById('cbEspecialidad').selectedIndex];
 	    console.log(id);
 	    var parametros = {
 	        opcion : "editarEspecialidad",
@@ -69,7 +69,7 @@ function editarEspecialidad(){
 	    var post = $.post(
 	                          "php/mysql.php",    // Script que se ejecuta en el servidor
 	                          parametros,                              
-	                          siRespuestaEspecialidad    // Función que se ejecuta cuando el servidor responde
+	                          siRespuestaEspecialidad  // Función que se ejecuta cuando el servidor responde
 	                          );  
 	}
 }

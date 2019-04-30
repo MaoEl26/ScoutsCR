@@ -1,41 +1,41 @@
 $( document ).ready(function() {
-    cargarEnfermedades();
+    cargarVacunas();
 });
 
-var arrayEnfermedad = [];
+var arrayVacunas = [];
 
-function cargarEnfermedades(){
+function cargarVacunas(){
 	var parametros = {
-		opcion : "cargarEnfermedades"
+		opcion : "cargarVacunas"
 	}
 
 	var post = $.post(
                          "php/mysql.php",    // Script que se ejecuta en el servidor
 	                     parametros,    	                       
-	                     siRespuestacargarEnfermedades    // Función que se ejecuta cuando el servidor responde
+	                     siRespuestacargarVacunas    // Función que se ejecuta cuando el servidor responde
                          );
 }
 
-function siRespuestacargarEnfermedades(r){
+function siRespuestacargarVacunas(r){
 	var doc = JSON.parse(r);
-	var salida = '<select class="form-control" tabindex="-1" id="cbEnfermedad">';                   
-	$("#cbEnfermedad").html("");
+	var salida = '<select class="form-control" tabindex="-1" id="cbVacunas">';                   
+	$("#cbVacunas").html("");
 	for (var i = 0; i < doc.length; i++) {
         var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
-        arrayEnfermedad[i] = obj.idEnfermedad;
+        arrayVacunas[i] = obj.idVacuna;
     }
     salida += "</select>";
-    $("#cbEnfermedad").html(salida);
+    $("#cbVacunas").html(salida);
 }
 
-function agregarEnfermedad(){
+function agregarVacuna(){
 	if (document.getElementById('txtNombre').value == "") {
-		alert('El nombre de la enfermedad es requerido');
+		alert('El nombre de la vacuna es requerido');
 	}else{	
 		var parametros = {
-	        opcion : "agregarEnfermedad",
+	        opcion : "agregarVacuna",
 	        txtNombre: $('#txtNombre').val(),
 	    };
 
@@ -43,7 +43,7 @@ function agregarEnfermedad(){
 		var post = $.post(
 	                          "php/mysql.php",    // Script que se ejecuta en el servidor
 		                      parametros,    	                       
-		                      siRespuestaEnfermedad    // Función que se ejecuta cuando el servidor responde
+		                      siRespuestaVacuna    // Función que se ejecuta cuando el servidor responde
 	                          );
 	}
 }
@@ -53,14 +53,14 @@ function limpiar(){
 	document.getElementById('txtNombreMod').value = "";
 }
 
-function editarEnfermedad(){
+function editarVacuna(){
 	if (document.getElementById('txtNombreMod').value == "") {
-		alert('El nombre actualizado de la enfermedad es requerido');
+		alert('El nombre actualizado de la vacuna es requerido');
 	}else{
-	    var id = arrayEnfermedad[document.getElementById('cbEnfermedad').selectedIndex];
+	    var id = arrayVacunas[document.getElementById('cbVacunas').selectedIndex];
 	    console.log(id);
 	    var parametros = {
-	        opcion : "editarEnfermedad",
+	        opcion : "editarVacuna",
 	        id : id,
 	        txtNombre: $('#txtNombreMod').val(),
 	    };
@@ -69,13 +69,13 @@ function editarEnfermedad(){
 	    var post = $.post(
 	                          "php/mysql.php",    // Script que se ejecuta en el servidor
 	                          parametros,                              
-	                          siRespuestaEnfermedad    // Función que se ejecuta cuando el servidor responde
+	                          siRespuestaVacuna    // Función que se ejecuta cuando el servidor responde
 	                          );  
 	}
 }
 
-function siRespuestaEnfermedad(r){
+function siRespuestaVacuna(r){
     limpiar();
     alert(r);
-    cargarEnfermedades();
+    cargarVacunas();
 }

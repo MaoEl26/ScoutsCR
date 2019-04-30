@@ -53,7 +53,7 @@ function limpiar(){
 	document.getElementById('txtNombreMod').value = "";
 }
 
-function editarEnfermedad(){
+function editarCargo(){
 	if (document.getElementById('txtNombreMod').value == "") {
 		alert('El nombre actualizado del cargo es requerido');
 	}else{
@@ -69,7 +69,7 @@ function editarEnfermedad(){
 	    var post = $.post(
 	                          "php/mysql.php",    // Script que se ejecuta en el servidor
 	                          parametros,                              
-	                          siRespuestaEnfermedad    // Función que se ejecuta cuando el servidor responde
+	                          siRespuestaCargo    // Función que se ejecuta cuando el servidor responde
 	                          );  
 	}
 }

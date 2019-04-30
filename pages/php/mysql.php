@@ -43,7 +43,7 @@ switch ($opcion) {
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
-		if(!$mysqli->query("CALL editarEnfermedad (@id,@nombre)"))
+		if(!$mysqli->query("CALL editarEnfermedad(@id,@nombre)"))
 		{
     		if($mysqli) $mysqli->close(); // Close DB connection
     		header('HTTP/1.1 400 Es posible que la enfermedad ya exista');
@@ -117,7 +117,7 @@ switch ($opcion) {
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
-		if(!$mysqli->query("CALL editarCargo (@id,@nombre)"))
+		if(!$mysqli->query("CALL editarCargo(@id,@nombre)"))
 		{
     		if($mysqli) $mysqli->close(); // Close DB connection
     		header('HTTP/1.1 400 Es posible que el cargo ya exista');
@@ -154,7 +154,7 @@ switch ($opcion) {
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
-		if(!$mysqli->query("CALL editarEspecialidad (@id,@nombre)"))
+		if(!$mysqli->query("CALL editarEspecialidad(@id,@nombre)"))
 		{
     		if($mysqli) $mysqli->close(); // Close DB connection
     		header('HTTP/1.1 400 Es posible que la especialidad ya exista');
@@ -162,6 +162,80 @@ switch ($opcion) {
 		}
 		if($mysqli) $mysqli->close();
 		echo "Especialidad actualizada";
+	break;
+
+	case 'agregarVacuna':
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL agregarVacuna(@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la vacuna ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Vacuna agregada";
+	break;
+
+	case  'cargarVacunas':
+		$resultado = $mysqli->query("CALL cargarVacunas()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'editarVacuna':
+		$id = $_POST['id'];
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL editarVacuna(@id,@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la vacuna ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Vacuna actualizada";
+	break;
+
+	case 'agregarMedicamento':
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL agregarMedicamento(@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el medicamento ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Medicamento agregado";
+	break;
+
+	case  'cargarMedicamentos':
+		$resultado = $mysqli->query("CALL cargarMedicamentos()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'editarMedicamento':
+		$id = $_POST['id'];
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL editarMedicamento(@id,@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el medicamento ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Medicamento agregado";
 	break;
 
 	default:

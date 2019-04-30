@@ -238,6 +238,154 @@ switch ($opcion) {
 		echo "Medicamento agregado";
 	break;
 
+	case 'agregarNivelBrujula':
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL agregarTipoBitacora(@nombre,1)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el nivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Nivel agregado";
+	break;
+
+	case  'cargarNivelesBrujula':
+		$resultado = $mysqli->query("CALL cargarTipoBitacora(1)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'editarNivelBrujula':
+		$id = $_POST['id'];
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL editarTipoBitacora(@id,@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el nivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Nivel actualizado";
+	break;
+
+	case 'agregarSubnivelBrujula':
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL agregarTipoArea(@nombre,1)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el subnivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Submivel agregado";
+	break;
+
+	case  'cargarSubnivelesBrujula':
+		$resultado = $mysqli->query("CALL cargarTipoArea(1)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'editarSubnivelBrujula':
+		$id = $_POST['id'];
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL editarTipoArea(@id,@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el subnivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Subnivel actualizado";
+	break;
+
+	case 'agregarNivelBitacora':
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL agregarTipoBitacora(@nombre,0)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el nivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Nivel agregado";
+	break;
+
+	case  'cargarNivelesBitacora':
+		$resultado = $mysqli->query("CALL cargarTipoBitacora(0)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'editarNivelBitacora':
+		$id = $_POST['id'];
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL editarTipoBitacora(@id,@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el nivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Nivel actualizado";
+	break;
+
+	case 'agregarSubnivelBitacora':
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL agregarTipoArea(@nombre,0)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el subnivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Submivel agregado";
+	break;
+
+	case  'cargarSubnivelesBitacora':
+		$resultado = $mysqli->query("CALL cargarTipoArea(0)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'editarSubnivelBitacora':
+		$id = $_POST['id'];
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL editarTipoArea(@id,@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el subnivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Subnivel actualizado";
+	break;
+
 	default:
 		# code...
 		break;

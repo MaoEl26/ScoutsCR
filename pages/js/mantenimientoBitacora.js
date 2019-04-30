@@ -1,14 +1,14 @@
 $( document ).ready(function() {
-    cargarNivelesBrujula();
-    cargarSubnivelesBrujula();
+    cargarNivelesBitacora();
+    cargarSubnivelesBitacora();
 });
 
 var arrayNiveles = []
 var arraySubniveles = []
 
-function cargarNivelesBrujula(){
+function cargarNivelesBitacora(){
 	var parametros = {
-		opcion : "cargarNivelesBrujula"
+		opcion : "cargarNivelesBitacora"
 	}
 
 	var post = $.post(
@@ -32,12 +32,12 @@ function siRespuestacargarNiveles(r){
     $("#cbNiveles").html(salida);
 }
 
-function agregarNivelBrujula(){
+function agregarNivelBitacora(){
 	if (document.getElementById('txtNombre').value == "") {
 		alert('El nombre del nivel es requerido');
 	}else{	
 		var parametros = {
-	        opcion : "agregarNivelBrujula",
+	        opcion : "agregarNivelBitacora",
 	        txtNombre: $('#txtNombre').val(),
 	    };
 
@@ -57,14 +57,14 @@ function limpiar(){
 	document.getElementById('txtNombreSubMod').value = "";
 }
 
-function editarNivelBrujula(){
+function editarNivelBitacora(){
 	if (document.getElementById('txtNombreMod').value == "") {
 		alert('El nombre actualizado del nivel es requerido');
 	}else{
 	    var id = arrayNiveles[document.getElementById('cbNiveles').selectedIndex];
 	    console.log(id);
 	    var parametros = {
-	        opcion : "editarNivelBrujula",
+	        opcion : "editarNivelBitacora",
 	        id : id,
 	        txtNombre: $('#txtNombreMod').val(),
 	    };
@@ -81,14 +81,14 @@ function editarNivelBrujula(){
 function siRespuestaNivel(r){
     limpiar();
     alert(r);
-    cargarNivelesBrujula();
-    cargarSubnivelesBrujula();
+    cargarNivelesBitacora();
+    cargarSubnivelesBitacora();
 }
 
 
-function cargarSubnivelesBrujula(){
+function cargarSubnivelesBitacora(){
 	var parametros = {
-		opcion : "cargarSubnivelesBrujula"
+		opcion : "cargarSubnivelesBitacora"
 	}
 
 	var post = $.post(
@@ -112,12 +112,12 @@ function siRespuestacargarSubniveles(r){
     $("#cbSubniveles").html(salida);
 }
 
-function agregarSubnivelBrujula(){
+function agregarSubnivelBitacora(){
 	if (document.getElementById('txtNombreSub').value == "") {
 		alert('El nombre del subnivel es requerido');
 	}else{	
 		var parametros = {
-	        opcion : "agregarSubnivelBrujula",
+	        opcion : "agregarSubnivelBitacora",
 	        txtNombre: $('#txtNombreSub').val(),
 	    };
 
@@ -131,7 +131,7 @@ function agregarSubnivelBrujula(){
 }
 
 
-function editarSubnivelBrujula(){
+function editarSubnivelBitacora(){
 	if (document.getElementById('txtNombreSubMod').value == "") {
 		alert('El nombre actualizado del subnivel es requerido');
 	}else{

@@ -9,6 +9,8 @@ var infoMiembroJuvenil = '<div class="x_title"><h2>Informacion miembro juvenil<s
 
 var arrayNivelesEducativos = [];
 var arrayProvincias = [];
+var arrayCantones = [];
+var arrayDistritos = [];
 var arrayCargos = [];
 
 var tipoMiembro = 1
@@ -83,7 +85,7 @@ function cargarProvincias(){
 
 function siRespuestacargarProvincias(r){
 	var doc = JSON.parse(r);
-	var salida = '<select class="form-control" tabindex="-1" id="cbProvincia">';                   
+	var salida = '<select class="form-control" tabindex="-1" id="cbProvincia" onclick="cargarCantones();">';                   
 	$("#cbProvincia").html("");
 	for (var i = 0; i < doc.length; i++) {
         var j = i;
@@ -93,6 +95,66 @@ function siRespuestacargarProvincias(r){
     }
     salida += "</select>";
     $("#cbProvincia").html(salida);
+    cargarCantones();
+}
+
+function cargarCantones(){
+	var index = document.getElementById('cbProvincia').selectedIndex;
+    var id = arrayProvincias[index];
+	var parametros = {
+		opcion : "cargarCantones",
+		id : id
+	}
+
+	var post = $.post(
+                         "php/mysql.php",    // Script que se ejecuta en el servidor
+	                     parametros,    	                       
+	                     siRespuestacargarCantones    // Función que se ejecuta cuando el servidor responde
+                         );
+}
+
+function siRespuestacargarCantones(r){
+	var doc = JSON.parse(r);
+	var salida = '<select class="form-control" tabindex="-1" id="cbCanton" onclick="cargarDistritos();">';                   
+	$("#cbCanton").html("");
+	for (var i = 0; i < doc.length; i++) {
+        var j = i;
+        var obj = doc[i];
+        salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
+        arrayCantones[i] = obj.idCanton;
+    }
+    salida += "</select>";
+    $("#cbCanton").html(salida);
+    cargarDistritos();
+}
+
+function cargarDistritos(){
+	var index = document.getElementById('cbProvincia').selectedIndex;
+    var id = arrayProvincias[index];
+	var parametros = {
+		opcion : "cargarDistritos",
+		id : id
+	}
+
+	var post = $.post(
+                         "php/mysql.php",    // Script que se ejecuta en el servidor
+	                     parametros,    	                       
+	                     siRespuestacargarDistritoss    // Función que se ejecuta cuando el servidor responde
+                         );
+}
+
+function siRespuestacargarDistritoss(r){
+	var doc = JSON.parse(r);
+	var salida = '<select class="form-control" tabindex="-1" id="cbDistrito" >';                   
+	$("#cbDistrito").html("");
+	for (var i = 0; i < doc.length; i++) {
+        var j = i;
+        var obj = doc[i];
+        salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
+        arrayDistritos[i] = obj.idDistrito;
+    }
+    salida += "</select>";
+    $("#cbDistrito").html(salida);
 }
 
 function cargarCargos(){
@@ -135,12 +197,38 @@ function infoExtra(radio){
 }
 
 function agregarPersona(){
-	var numGrupo = $('#txtNumGrupo').val();
-	var numPoliza = $('#txtNumPoliza').val();
-	var Nombre = $('#txtNombre').val();
-	var primerApellido = $('#txtPrimerApellido').val();
-	var segundoApellido = $('#txtSegundoApellido').val();
-	var Identificacion = $('#txtIdentificacion').val();
-	var fechaNacimiento = $('#txtFechaNacimiento').val();
+	var idNivelEducativo = arrayNivelesEducativos[document.getElementById('cbNivelEducativo').selectedIndex];
+	var idDistrito = arrayDistritos[document.getElementById('cbDistrito').selectedIndex];
+    var parametros = {
+        opcion : "agregarPersona",
+        numGrupo: $('#txtNumGrupo').val(),
+        numPoliza: $('#txtNumPoliza').val(),
+        Nombre: $('#txtNombre').val(),
+        primerApellido: $('#txtPrimerApellido').val(),
+        segundoApellido: $('#txtSegundoApellido').val(),
+        Identificacion: $('#txtIdentificacion').val(),
+        fechaNacimiento: $('#txtFechaNacimiento').val(),
+        idGenero : genero,
+        Telefono: $('#txtTelefono').val(),
+        Correo: $('#txtCorreo').val(),
+        idDistrito : idDistrito,
+        Direccion: $('#txtDireccion').val(),
+        idNivelEducativo : idNivelEducativo,
+        lugarOficio: $('#txtLugarOficio').val(),
+        Titulos: $('#txtTitulos').val(),
+        Religion: $('#txtReligion').val(),
+        Nacionalidad: $('#txtNacionalidad').val(),
+        fechaInscripcion: $('#fechaInscripcion').val()
+    };
 
+    // Realizar la petición
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuestaagregarPersona    // Función que se ejecuta cuando el servidor responde
+                          ); 
+}
+
+function siRespuestaagregarPersona(){
+	alert("persona agregada");
 }

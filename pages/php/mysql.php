@@ -43,6 +43,74 @@ switch ($opcion) {
 		echo json_encode($json) ;
 	break;
 
+	case  'cargarCantones':
+		$id = $_POST['id'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$resultado = $mysqli->query("CALL cargarCantones (@id)");
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'cargarDistritos':
+		$id = $_POST['id'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$resultado = $mysqli->query("CALL cargarDistritos (@id)");
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'agregarPersona':
+		$numGrupo = $_POST['numGrupo'];
+		$numPoliza = $_POST['numPoliza'];
+		$Nombre = $_POST['Nombre'];
+		$primerApellido = $_POST['primerApellido'];
+		$segundoApellido = $_POST['segundoApellido'];
+		$Identificacion = $_POST['Identificacion'];
+		$fechaNacimiento = $_POST['fechaNacimiento'];
+		$idGenero = $_POST['idGenero'];
+		$Telefono = $_POST['Telefono'];
+		$Correo = $_POST['Correo'];
+		$idDistrito = $_POST['idDistrito'];
+		$Direccion = $_POST['Direccion'];
+		$idNivelEducativo = $_POST['idNivelEducativo'];
+		$lugarOficio = $_POST['lugarOficio'];
+		$Titulos = $_POST['Titulos'];
+		$Religion = $_POST['Religion'];
+		$Nacionalidad = $_POST['Nacionalidad'];
+		$fechaInscripcion = $_POST['fechaInscripcion'];
+		$mysqli->query("SET @numGrupo  = " . "'" . $mysqli->real_escape_string($numGrupo) . "'");
+		$mysqli->query("SET @numPoliza  = " . "'" . $mysqli->real_escape_string($numPoliza) . "'");
+		$mysqli->query("SET @Nombre  = " . "'" . $mysqli->real_escape_string($Nombre) . "'");
+		$mysqli->query("SET @primerApellido  = " . "'" . $mysqli->real_escape_string($primerApellido) . "'");
+		$mysqli->query("SET @segundoApellido  = " . "'" . $mysqli->real_escape_string($segundoApellido) . "'");
+		$mysqli->query("SET @Identificacion  = " . "'" . $mysqli->real_escape_string($Identificacion) . "'");
+		$mysqli->query("SET @fechaNacimiento  = " . "'" . $mysqli->real_escape_string($fechaNacimiento) . "'");
+		$mysqli->query("SET @idGenero  = " . "'" . $mysqli->real_escape_string($idGenero) . "'");
+		$mysqli->query("SET @Telefono  = " . "'" . $mysqli->real_escape_string($Telefono) . "'");
+		$mysqli->query("SET @Correo  = " . "'" . $mysqli->real_escape_string($Correo) . "'");
+		$mysqli->query("SET @idDistrito  = " . "'" . $mysqli->real_escape_string($idDistrito) . "'");
+		$mysqli->query("SET @Direccion  = " . "'" . $mysqli->real_escape_string($Direccion) . "'");
+		$mysqli->query("SET @idNivelEducativo  = " . "'" . $mysqli->real_escape_string($idNivelEducativo) . "'");
+		$mysqli->query("SET @lugarOficio  = " . "'" . $mysqli->real_escape_string($lugarOficio) . "'");
+		$mysqli->query("SET @Titulos  = " . "'" . $mysqli->real_escape_string($Titulos) . "'");
+		$mysqli->query("SET @Religion  = " . "'" . $mysqli->real_escape_string($Religion) . "'");
+		$mysqli->query("SET @Nacionalidad  = " . "'" . $mysqli->real_escape_string($Nacionalidad) . "'");
+		$mysqli->query("SET @fechaInscripcion  = " . "'" . $mysqli->real_escape_string($fechaInscripcion) . "'");
+		if(!$mysqli->query("CALL agregarPersona (@numGrupo,@numPoliza,@Nombre,@primerApellido,@segundoApellido,@Identificacion,@fechaNacimiento,@idGenero,@Telefono,@Correo,@idDistrito,
+			@Direccion,@idNivelEducativo,@lugarOficio,@Titulos,@Religion,@Nacionalidad,@fechaInscripcion)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la persona ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Persona agregada";
+	break;
+
 	case 'agregarEnfermedad':
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");

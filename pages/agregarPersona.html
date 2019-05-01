@@ -228,23 +228,15 @@
                         <label class="control-label col-md-0 col-sm-3 col-xs-12">Direccion </label>
                         <label class="control-label col-md-1 col-sm-3 col-xs-12">Provincia </label>
                         <div class="col-md-1 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbProvincia"></select>
+                          <select class="form-control" id="cbProvincia" onclick="cargarCantones();"></select>
                         </div>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12">Canton </label>
                         <div class="col-md-1 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbCanton">
-                            <option>Canton 1</option>
-                            <option>Canton 2</option>
-                            <option>Canton 3</option>
-                          </select>
+                          <select class="form-control" id="cbCanton" onclick="cargarDistritos();"></select>
                         </div>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12">Distrito </label>
                         <div class="col-md-1 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbDistrito">
-                            <option>Distrito 1</option>
-                            <option>Distrito 2</option>
-                            <option>Distrito 3</option>
-                          </select>
+                          <select class="form-control" id="cbDistrito"></select>
                         </div>
                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="Nombre">Detalle <span class="required">*</span></label>
                         <div class="col-md-5 col-sm-6 col-xs-12">

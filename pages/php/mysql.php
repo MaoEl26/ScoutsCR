@@ -16,6 +16,24 @@ $opcion = $_POST['opcion'];
 
 switch ($opcion) {
 
+	case  'cargarNivelesEducativos':
+		$resultado = $mysqli->query("CALL cargarNivelesEducativos()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'cargarProvincias':
+		$resultado = $mysqli->query("CALL cargarProvincias()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
 	case 'agregarEnfermedad':
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");

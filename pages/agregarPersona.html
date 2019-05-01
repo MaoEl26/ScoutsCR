@@ -203,12 +203,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Nivel educativo </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbProgresion">
-                            <option>Ninguno</option>
-                            <option>Escuela</option>
-                            <option>Colegio</option>
-                            <option>Universidad</option>
-                          </select>
+                          <select class="form-control" id="cbNivelEducativo"></select>
                         </div>
                       </div> 
                       <div class="form-group">
@@ -219,9 +214,9 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Titulos <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Titulos </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="txtTitulos" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                          <textarea id="txtTitulos" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
                             data-parsley-validation-threshold="10"></textarea>
                         </div>
                       </div> 
@@ -243,15 +238,7 @@
                         <label class="control-label col-md-0 col-sm-3 col-xs-12">Direccion </label>
                         <label class="control-label col-md-1 col-sm-3 col-xs-12">Provincia </label>
                         <div class="col-md-1 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbProvincia">
-                            <option>San Jose</option>
-                            <option>Cartago</option>
-                            <option>Alajuela</option>
-                            <option>Heredia</option>
-                            <option>Guanacaste</option>
-                            <option>Puntarenas</option>
-                            <option>Limon</option>
-                          </select>
+                          <select class="form-control" id="cbProvincia"></select>
                         </div>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12">Canton </label>
                         <div class="col-md-1 col-sm-6 col-xs-12">
@@ -271,7 +258,7 @@
                         </div>
                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="Nombre">Detalle <span class="required">*</span></label>
                         <div class="col-md-5 col-sm-6 col-xs-12">
-                          <textarea id="txtDireccion" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                          <textarea id="txtDireccion" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
                             data-parsley-validation-threshold="10"></textarea>
                         </div>
                       </div>
@@ -288,21 +275,14 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" id="btnTipo" required="required" data-toggle="buttons">
                             <label class="btn btn-default active">
-                              <input type="radio" name="options" id="btnMiembroJuvenil"> Miembro Juvenil
+                              <input type="radio" name="options" id="btnMiembroJuvenil" onchange="infoExtra(this);" value="1"> Miembro Juvenil
                             </label>
                             <label class="btn btn-default">
-                              <input type="radio" name="options" id="btnDirigente"> Dirigente
+                              <input type="radio" name="options" id="btnDirigente" onchange="infoExtra(this);" value="2"> Dirigente
                             </label>
                           </div>
                         </div>
                       </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="reset">Borrar</button>
-                          <button type="submit" class="btn btn-success">Agregar</button>
-                        </div>
-                      </div>  
                     </form>
                   </div>
                 </div>
@@ -312,7 +292,7 @@
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
+                <div class="x_panel" id="informationForm">
                   <div class="x_title">
                     <h2>Informacion miembro juvenil<small></small></h2>
                     <div class="clearfix"></div>
@@ -323,23 +303,13 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Seccion </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbSeccion">
-                            <option>Manada</option>
-                            <option>Tropa</option>
-                            <option>Wak</option>
-                            <option>Comunidad</option>
-                          </select>
+                          <select class="form-control" id="cbSeccion"></select>
                         </div>
                       </div> 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Etapa de progresion </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbProgresion">
-                            <option>Etapa 1</option>
-                            <option>Etapa 2</option>
-                            <option>Etapa 3</option>
-                            <option>Etapa 4</option>
-                          </select>
+                          <select class="form-control" id="cbProgresion"></select>
                         </div>
                       </div> 
                       <div class="form-group">
@@ -360,40 +330,20 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Nivel de escritura </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbEscritura">
-                            <option>Bajo</option>
-                            <option>Medio</option>
-                            <option>Avanzado</option>
-                          </select>
-                        </div>
-                      </div> 
+                          <select class="form-control" id="cbEscritura"></div> 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Nivel de lectura </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbLectura">
-                            <option>Bajo</option>
-                            <option>Medio</option>
-                            <option>Avanzado</option>
-                          </select>
+                          <select class="form-control" id="cbLectura"></select>
                         </div>
                       </div> 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Nivel de comunicacion </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbComunicacion">
-                            <option>Bajo</option>
-                            <option>Medio</option>
-                            <option>Avanzado</option>
-                          </select>
+                          <select class="form-control" id="cbComunicacion"></select>
                         </div>
                       </div>
                       <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="reset">Borrar</button>
-                          <button type="submit" class="btn btn-success">Agregar</button>
-                        </div>
-                      </div>
                     </form>
                   </div>
                   <div class="x_title">
@@ -442,31 +392,15 @@
                         <label class="control-label col-md-0 col-sm-3 col-xs-12">Direccion </label>
                         <label class="control-label col-md-1 col-sm-3 col-xs-12">Provincia </label>
                         <div class="col-md-1 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbProvinciaResponsable">
-                            <option>San Jose</option>
-                            <option>Cartago</option>
-                            <option>Alajuela</option>
-                            <option>Heredia</option>
-                            <option>Guanacaste</option>
-                            <option>Puntarenas</option>
-                            <option>Limon</option>
-                          </select>
+                          <select class="form-control" id="cbProvinciaResponsable"></select>
                         </div>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12">Canton </label>
                         <div class="col-md-1 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbCantonResponsable">
-                            <option>Canton 1</option>
-                            <option>Canton 2</option>
-                            <option>Canton 3</option>
-                          </select>
+                          <select class="form-control" id="cbCantonResponsable"></select>
                         </div>
                         <label class="control-label col-md-1 col-sm-1 col-xs-12">Distrito </label>
                         <div class="col-md-1 col-sm-6 col-xs-12">
-                          <select class="form-control" id="cbDistritoResponsable">
-                            <option>Distrito 1</option>
-                            <option>Distrito 2</option>
-                            <option>Distrito 3</option>
-                          </select>
+                          <select class="form-control" id="cbDistritoResponsable"></select>
                         </div>
                         <label class="control-label col-md-4 col-sm-3 col-xs-12" for="Nombre">Detalle <span class="required">*</span></label>
                         <div class="col-md-5 col-sm-6 col-xs-12">
@@ -478,7 +412,7 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="reset">Borrar</button>
-                          <button type="submit" class="btn btn-success">Agregar</button>
+                          <button type="submit" class="btn btn-success" onclick="agregarPersona();">Agregar</button>
                         </div>
                       </div>
                     </form>
@@ -487,54 +421,7 @@
               </div>
             </div>
 
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Informacion miembro adulto<small></small></h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Cargo que desempeña </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" class="flat"> Cargo 1
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" class="flat"> Cargo 2
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" class="flat"> Cargo 3
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" class="flat"> Cargo 4
-                            </label>
-                          </div>
-                        </div>
-                      </div> 
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="reset">Borrar</button>
-                          <button type="submit" class="btn btn-success">Agregar</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
         <!-- /page content -->
@@ -611,5 +498,6 @@
     <script src="../vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <script src="js/agregarPersona.js"></script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 $( document ).ready(function() {
     cargarNivelesEducativos();
     cargarProvincias();
+    cargarGeneros();
 });
 
 var infoMiembroAdulto = '<div class="x_panel" id="informationForm"><div class="x_title"><h2>Informacion miembro adulto<small></small></h2><div class="clearfix"></div></div><div class="x_content"><br /><form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Cargos que desempeña </label><div class="col-md-9 col-sm-9 col-xs-12" id="cargosCh"></div></div> <div class="ln_solid"></div><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"><button class="btn btn-primary" type="reset">Borrar</button><button type="submit" class="btn btn-success" onclick="agregarPersona();">Agregar</button></div></div></form></div></div>'
@@ -11,6 +12,7 @@ var arrayProvincias = [];
 var arrayCargos = [];
 
 var tipoMiembro = 1
+var genero = 0
 
 function cargarNivelesEducativos(){
 	var parametros = {
@@ -36,6 +38,35 @@ function siRespuestacargarNivelesEducativos(r){
     }
     salida += "</select>";
     $("#cbNivelEducativo").html(salida);
+}
+
+function cargarGeneros(){
+	var parametros = {
+		opcion : "cargarGeneros"
+	}
+
+	var post = $.post(
+                         "php/mysql.php",    // Script que se ejecuta en el servidor
+	                     parametros,    	                       
+	                     siRespuestacargarGeneros    // Función que se ejecuta cuando el servidor responde
+                         );
+}
+
+function siRespuestacargarGeneros(r){
+	var doc = JSON.parse(r);
+	var salida = '<div class="btn-group" id="btnGenero" data-toggle="buttons">';                   
+	$("#btnGenero").html("");
+	for (var i = 0; i < doc.length; i++) {
+        var j = i;
+        var obj = doc[i];
+        salida += '<label class="btn btn-default active"><input type="radio" name="options" id="btnMasculino" onchange="cambiarGenero(this);" value="'+obj.idGenero+'">'+obj.descripcion+'</label>';
+    }
+    salida += "</div>";
+    $("#btnGenero").html(salida);
+}
+
+function cambiarGenero(radio) {
+	genero = radio.value;
 }
 
 function cargarProvincias(){
@@ -101,4 +132,15 @@ function infoExtra(radio){
 		$("#informationForm").html(infoMiembroAdulto);
 		cargarCargos();
 	};
+}
+
+function agregarPersona(){
+	var numGrupo = $('#txtNumGrupo').val();
+	var numPoliza = $('#txtNumPoliza').val();
+	var Nombre = $('#txtNombre').val();
+	var primerApellido = $('#txtPrimerApellido').val();
+	var segundoApellido = $('#txtSegundoApellido').val();
+	var Identificacion = $('#txtIdentificacion').val();
+	var fechaNacimiento = $('#txtFechaNacimiento').val();
+
 }

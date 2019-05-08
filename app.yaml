@@ -5,9 +5,33 @@ api_version: 1
 threadsafe: yes
 
 handlers:
+- url: /pages
+  static_dir: pages
+
+- url: /vendors
+  static_dir: vendors
+
+- url: /src
+  static_dir: src
+
+- url: /docs
+  static_dir: docs
+
+- url: /build
+  static_dir: build
+
+- url: /pages/images
+  static_dir: /pages/images
+
+- url: /pages/js
+  static_dir: /pages/js 
+
+- url: /pages/php
+  static_dir: /pages/php
+
 - url: /favicon\.ico
   static_files: Logos/Scouts-CR.ico
   upload: favicon\.ico
 
-- url: /.*
+- url: .*
   script: index.php

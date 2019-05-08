@@ -1,11 +1,13 @@
 <?php
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-$DBName = "scouts";
+$servername = null;
+$username = 'root';
+$password = 'bLyidsbaGhNMwIJz';
+$DBName = 'dbscoutscr'; 
+$dbport = null;
+$instance = '/cloudsql/scoutscr:us-central1:dbscoutscr';
 
 //conecta
-$mysqli = new mysqli($servername, $username, $password,$DBName);
+$mysqli = new mysqli($servername, $username, $password,$DBName,$instance);
 $mysqli->set_charset("utf8");
 if(!$mysqli) {
     header('HTTP/1.1 400 Bad Request');

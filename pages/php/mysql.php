@@ -1,13 +1,23 @@
 <?php
+/*
 $servername = null;
 $username = 'root';
 $password = 'bLyidsbaGhNMwIJz';
 $DBName = 'dbscoutscr'; 
 $dbport = null;
 $instance = '/cloudsql/scoutscr:us-central1:dbscoutscr';
+*/
+
+
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+$DBName = "scouts";
+
 
 //conecta
-$mysqli = new mysqli($servername, $username, $password,$DBName,$instance);
+//$mysqli = new mysqli($servername, $username, $password,$DBName,$instance);
+$mysqli = new mysqli($servername, $username, $password,$DBName);
 $mysqli->set_charset("utf8");
 if(!$mysqli) {
     header('HTTP/1.1 400 Bad Request');
@@ -29,6 +39,15 @@ switch ($opcion) {
 
 	case  'cargarNivelesEducativos':
 		$resultado = $mysqli->query("CALL cargarNivelesEducativos()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'cargarNiveles':
+		$resultado = $mysqli->query("CALL cargarNiveles()");
 		$json = array();
 		while($row = $resultado->fetch_array()){
 			$json[] = $row;
@@ -59,6 +78,24 @@ switch ($opcion) {
 		$id = $_POST['id'];
 		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
 		$resultado = $mysqli->query("CALL cargarDistritos (@id)");
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'cargarTiposSeccion':
+		$resultado = $mysqli->query("CALL cargarTiposSeccion()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'cargarEtapasProgresion':
+		$resultado = $mysqli->query("CALL cargarEtapasProgresion()");
+		$json = array();
 		while($row = $resultado->fetch_array()){
 			$json[] = $row;
 		}

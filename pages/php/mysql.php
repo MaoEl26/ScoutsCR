@@ -520,6 +520,43 @@ switch ($opcion) {
 		echo "Subnivel actualizado";
 	break;
 
+	case 'agregarGrupo':
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL agregarGrupo (@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el grupo ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Grupo agregado";
+	break;
+
+	case  'cargarGrupos':
+		$resultado = $mysqli->query("CALL cargarGrupos()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'editarGrupo':
+		$id = $_POST['id'];
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL editarGrupo (@id,@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el grupo ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Grupo agregado";
+	break;
+
 	default:
 		# code...
 		break;

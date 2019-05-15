@@ -28,6 +28,15 @@ $opcion = $_POST['opcion'];
 
 switch ($opcion) {
 
+	case  'cargarNumerosGrupos':
+		$resultado = $mysqli->query("CALL cargarNumerosGrupos()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
 	case  'cargarGeneros':
 		$resultado = $mysqli->query("CALL cargarGeneros()");
 		$json = array();
@@ -139,8 +148,35 @@ switch ($opcion) {
 		$mysqli->query("SET @Religion  = " . "'" . $mysqli->real_escape_string($Religion) . "'");
 		$mysqli->query("SET @Nacionalidad  = " . "'" . $mysqli->real_escape_string($Nacionalidad) . "'");
 		$mysqli->query("SET @fechaInscripcion  = " . "'" . $mysqli->real_escape_string($fechaInscripcion) . "'");
-		if(!$mysqli->query("CALL agregarPersona (@numGrupo,@numPoliza,@Nombre,@primerApellido,@segundoApellido,@Identificacion,@fechaNacimiento,@idGenero,@Telefono,@Correo,@idDistrito,
-			@Direccion,@idNivelEducativo,@lugarOficio,@Titulos,@Religion,@Nacionalidad,@fechaInscripcion)"))
+		if(!$mysqli->query("CALL agregarPersona (@numGrupo,@numPoliza,@Nombre,@primerApellido,@segundoApellido,@Identificacion,@fechaNacimiento,@idGenero,@Telefono,@Correo,@idDistrito,@Direccion,@idNivelEducativo,@lugarOficio,@Titulos,@Religion,@Nacionalidad,@fechaInscripcion)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la persona ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Persona agregada";
+	break;
+
+	case 'agregarMiembroJuvenil':
+		$Identificacion = $_POST['Identificacion'];
+		$idSeccion = $_POST['idSeccion'];
+		$idEtapa = $_POST['idEtapa'];
+		$fechaPromesa = $_POST['fechaPromesa'];
+		$idioma = $_POST['idioma'];
+		$idNivelEscritura = $_POST['idNivelEscritura'];
+		$idNivelLectura = $_POST['idNivelLectura'];
+		$idNivelComunicacion = $_POST['idNivelComunicacion'];
+		$mysqli->query("SET @Identificacion  = " . "'" . $mysqli->real_escape_string($Identificacion) . "'");
+		$mysqli->query("SET @idSeccion  = " . "'" . $mysqli->real_escape_string($idSeccion) . "'");
+		$mysqli->query("SET @idEtapa  = " . "'" . $mysqli->real_escape_string($idEtapa) . "'");
+		$mysqli->query("SET @fechaPromesa  = " . "'" . $mysqli->real_escape_string($fechaPromesa) . "'");
+		$mysqli->query("SET @idioma  = " . "'" . $mysqli->real_escape_string($idioma) . "'");
+		$mysqli->query("SET @idNivelEscritura  = " . "'" . $mysqli->real_escape_string($idNivelEscritura) . "'");
+		$mysqli->query("SET @idNivelLectura  = " . "'" . $mysqli->real_escape_string($idNivelLectura) . "'");
+		$mysqli->query("SET @idNivelComunicacion  = " . "'" . $mysqli->real_escape_string($idNivelComunicacion) . "'");
+		if(!$mysqli->query("CALL agregarMiembroJuvenil (@Identificacion,@idSeccion,@idEtapa,@fechaPromesa,@idioma,
+			@idNivelEscritura,@idNivelLectura,@idNivelComunicacion)"))
 		{
     		if($mysqli) $mysqli->close(); // Close DB connection
     		header('HTTP/1.1 400 Es posible que la persona ya exista');

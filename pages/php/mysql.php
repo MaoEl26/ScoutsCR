@@ -214,6 +214,21 @@ switch ($opcion) {
 		echo "Responsable agregado";
 	break;
 
+	case 'agregarMiembroAdulto':
+		$idPersona = $_POST['idPersona'];
+		$idTipoCargo = $_POST['idTipoCargo'];
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		$mysqli->query("SET @idTipoCargo  = " . "'" . $mysqli->real_escape_string($idTipoCargo) . "'");		
+		if(!$mysqli->query("CALL agregarMiembroAdulto (@idPersona,@idTipoCargo)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la persona ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Adulto agregado";
+	break;
+
 	case 'agregarEnfermedad':
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");

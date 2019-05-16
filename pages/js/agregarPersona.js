@@ -7,9 +7,13 @@ $( document ).ready(function() {
     cargarEtapasProgresion();
     cargarNiveles();
     cargarProvinciasResponsable();
+    cargarCargos();
+    document.getElementById('lblCargos').style.display = "none";
+    document.getElementById('cbCargos').style.display = "none";
+    document.getElementById('btnAgregar').style.display = "none";
 });
 
-var infoMiembroAdulto = '<div class="x_panel" id="informationForm"><div class="x_title"><h2>Informacion miembro adulto<small></small></h2><div class="clearfix"></div></div><div class="x_content"><br /><form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Cargos que desempeña </label><div class="col-md-9 col-sm-9 col-xs-12" id="cargosCh"></div></div> <div class="ln_solid"></div><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"><button class="btn btn-primary" type="reset">Borrar</button><button type="submit" class="btn btn-success" onclick="agregarPersona();">Agregar</button></div></div></form></div></div>'
+var infoMiembroAdulto = '<div class="x_title"><h2>Informacion miembro adulto<small></small></h2><div class="clearfix"></div></div><div class="x_content"><br /><form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Cargos que desempeña </label><div class="col-md-6 col-sm-6 col-xs-12"<select class="form-control" id="cbCargos" onclick="setCargo(this);"></select></div></div> <div class="ln_solid"></div><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"></div></div></form></div><button type="submit" class="btn btn-success" onclick="agregarPersona();">Agregar</button>'
 var infoMiembroJuvenil = '<div class="x_title"><h2>Informacion miembro juvenil<small></small></h2><div class="clearfix"></div></div><div class="x_content"><br /><form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Seccion </label><div class="col-md-6 col-sm-6 col-xs-12"><select class="form-control" id="cbSeccion"></select></div></div> <div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Etapa de progresion </label><div class="col-md-6 col-sm-6 col-xs-12"><select class="form-control" id="cbProgresion"></select></div></div> <div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de promesa </label><div class="col-md-6 xdisplay_inputx form-group has-feedback"><input type="text" class="form-control has-feedback-left" id="single_cal3" aria-describedby="txtFechaPromesa"><span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span><span id="txtFechaPromesa" class="sr-only">(success)</span></div></div><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Idioma </label><div class="col-md-6 col-sm-6 col-xs-12"><input type="text" id="txtIdioma" class="form-control col-md-7 col-xs-12"><span class="fa fa-user form-control-feedback right" aria-hidden="true"></span></div></div><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Nivel de escritura </label><div class="col-md-6 col-sm-6 col-xs-12"><select class="form-control" id="cbEscritura"></select></div></div> <div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Nivel de lectura </label><div class="col-md-6 col-sm-6 col-xs-12"><select class="form-control" id="cbLectura"></select></div></div> <div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Nivel de comunicacion </label><div class="col-md-6 col-sm-6 col-xs-12"><select class="form-control" id="cbComunicacion"></select></div></div><div class="ln_solid"></div></form></div><div class="x_title"><h2>Informacion del adulto responsable<small></small></h2><div class="clearfix"></div></div><div class="x_content"><br /><form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Nombre <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input type="text" id="txtNombreResponsable" required="required" class="form-control col-md-7 col-xs-12"><span class="fa fa-user form-control-feedback right" aria-hidden="true"></span></div></div><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Primer Apellido <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input type="text" id="txtPrimerApellidoResponsable" required="required" class="form-control col-md-7 col-xs-12"><span class="fa fa-user form-control-feedback right" aria-hidden="true"></span></div></div><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Segundo Apellido <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input type="text" id="txtSegundoApellidoResponsable" required="required" class="form-control col-md-7 col-xs-12"><span class="fa fa-user form-control-feedback right" aria-hidden="true"></span></div></div><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Correo <span class="required">*</span></label><div class="col-md-6 col-sm-6 col-xs-12"><input type="text" id="txtCorreoResponsable" required="required" class="form-control col-md-7 col-xs-12"><span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span></div></div><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Telefono <span class="required">*</span></label></label><div class="col-md-6 col-sm-6 col-xs-12"><input type="text" id="txtTelefonoResponsable" required="required" class="form-control" data-inputmask="mask : (999) 999-9999"><span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span></div></div><div class="form-group"><label class="control-label col-md-0 col-sm-3 col-xs-12">Direccion </label><label class="control-label col-md-1 col-sm-3 col-xs-12">Provincia </label><div class="col-md-1 col-sm-6 col-xs-12"><select class="form-control" id="cbProvinciaResponsable" onclick="cargarCantonesResponsable();"></select></div><label class="control-label col-md-1 col-sm-1 col-xs-12">Canton </label><div class="col-md-1 col-sm-6 col-xs-12"><select class="form-control" id="cbCantonResponsable" onclick="cargarDistritosResponsable();"></select></div><label class="control-label col-md-1 col-sm-1 col-xs-12">Distrito </label><div class="col-md-1 col-sm-6 col-xs-12"><select class="form-control" id="cbDistritoResponsable"></select></div><label class="control-label col-md-4 col-sm-3 col-xs-12" for="Nombre">Detalle <span class="required">*</span></label><div class="col-md-5 col-sm-6 col-xs-12"><textarea id="txtDireccionResponsable" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."data-parsley-validation-threshold="10"></textarea></div></div><div class="ln_solid"></div><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"><button class="btn btn-primary" type="reset">Borrar</button><button type="submit" class="btn btn-success" onclick="agregarPersona();">Agregar</button></div></div></form></div>'
 
 var arrayNumerosGrupos = [];
@@ -25,8 +29,14 @@ var arrayNivel = [];
 var arrayCantonesResponsable = [];
 var arrayDistritosResponsable = [];
 
-var tipoMiembro = 1
-var genero = 0
+var tipoMiembro = 1;
+var genero = 0;
+var cargo = 0;
+
+function setCargo(combobox){
+    cargo = combobox.value;
+    console.error(cargo);
+}
 
 function cargarNumerosGrupos(){
     var parametros = {
@@ -45,7 +55,6 @@ function siRespuestacargarNumerosGrupos(r){
     var salida = '<select class="form-control" tabindex="-1" id="cbNumeroGrupo">';                   
     $("#cbNumeroGrupo").html("");
     for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.numGrupo+'</option>';
         arrayNumerosGrupos[i] = obj.idgrupo;
@@ -71,7 +80,6 @@ function siRespuestacargarNivelesEducativos(r){
 	var salida = '<select class="form-control" tabindex="-1" id="cbNivelEducativo">';                   
 	$("#cbNivelEducativo").html("");
 	for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
         arrayNivelesEducativos[i] = obj.idNivelEducacion;
@@ -101,7 +109,6 @@ function siRespuestacargarNiveles(r){
     $("#cbLectura").html("");
     $("#cbComunicacion").html("");
     for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
         salida2 += '<option value="'+i+'">'+obj.descripcion+'</option>';
@@ -134,7 +141,6 @@ function siRespuestacargarGeneros(r){
     genero = doc[0].idGenero;                  
 	$("#btnGenero").html("");
 	for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<label class="btn btn-default active"><input type="radio" name="options" id="btnMasculino" onchange="cambiarGenero(this);" value="'+obj.idGenero+'">'+obj.descripcion+'</label>';
     }
@@ -163,7 +169,6 @@ function siRespuestacargarProvincias(r){
 	var salida = '<select class="form-control" tabindex="-1" id="cbProvincia" onclick="cargarCantones();">';                   
 	$("#cbProvincia").html("");
 	for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
         arrayProvincias[i] = obj.idProvincia;
@@ -193,7 +198,6 @@ function siRespuestacargarCantones(r){
 	var salida = '<select class="form-control" tabindex="-1" id="cbCanton" onclick="cargarDistritos();">';                   
 	$("#cbCanton").html("");
 	for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
         arrayCantones[i] = obj.idCanton;
@@ -223,7 +227,6 @@ function siRespuestacargarDistritos(r){
 	var salida = '<select class="form-control" tabindex="-1" id="cbDistrito" >';                   
 	$("#cbDistrito").html("");
 	for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
         arrayDistritos[i] = obj.idDistrito;
@@ -246,32 +249,38 @@ function cargarCargos(){
 
 function siRespuestacargarCargos(r){
 	var doc = JSON.parse(r);
-	var salida = '<div class="col-md-9 col-sm-9 col-xs-12" id="cargosCh">';                   
-	$("#cargosCh").html("");
+	var salida = '<select class="form-control" tabindex="-1" id="cbCargos">';                   
+	$("#cbCargos").html("");
 	for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
-        salida += '<div class="checkbox"><label><input type="checkbox" class="flat" id="cargoCh'+i+'">'+obj.descripcion+'</label></div>';
+        salida += '<option value="'+obj.idTipoCargo+'">'+obj.descripcion+'</option>';
         arrayCargos[i] = obj.idTipoCargo;
     }
-    salida += "</div>";
-    $("#cargosCh").html(salida);
+    salida += "</select>";
+    $("#cbCargos").html(salida);
 }
 
 function infoExtra(radio){
-	$("#informationForm").html("");
+	//$("#informationForm").html("");
 	if (radio.value == 1) {
-		tipoMiembro = 1
+		tipoMiembro = 1;
 		$("#informationForm").html(infoMiembroJuvenil);
-        cargarTiposSeccion();
+        /*cargarTiposSeccion();
         cargarEtapasProgresion();
         cargarNiveles();
-        cargarProvinciasResponsable();
+        cargarProvinciasResponsable();*/
+        document.getElementById('lblCargos').style.display = "none";
+        document.getElementById('cbCargos').style.display = "none";
+        document.getElementById('btnAgregar').style.display = "none";
 	};
 	if (radio.value == 2) {
-		tipoMiembro = 2
-		$("#informationForm").html(infoMiembroAdulto);
-		cargarCargos();
+		tipoMiembro = 2;
+		//$("#informationForm").html(infoMiembroAdulto);
+		//cargarCargos();
+        $("#informationForm").html("");
+        document.getElementById('lblCargos').style.display = "block";
+        document.getElementById('cbCargos').style.display = "block";
+        document.getElementById('btnAgregar').style.display = "block";
 	};
 }
 
@@ -292,7 +301,6 @@ function siRespuestacargarTiposSeccion(r){
     var salida = '<select class="form-control" tabindex="-1" id="cbSeccion" >';                   
     $("#cbSeccion").html("");
     for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.Descripcion+'</option>';
         arraySecciones[i] = obj.idTipoSeccion;
@@ -318,7 +326,6 @@ function siRespuestacargarEtapasProgresion(r){
     var salida = '<select class="form-control" tabindex="-1" id="cbProgresion" >';                   
     $("#cbProgresion").html("");
     for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
         arrayEstapas[i] = obj.idEtapaProgresion;
@@ -344,7 +351,6 @@ function siRespuestacargarProvinciasResponsable(r){
     var salida = '<select class="form-control" tabindex="-1" id="cbProvinciaResponsable" onclick="cargarCantonesResponsable();">';                     
     $("#cbProvinciaResponsable").html("");
     for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
     }
@@ -373,7 +379,6 @@ function siRespuestacargarCantonesResponsable(r){
     var salida = '<select class="form-control" tabindex="-1" id="cbCanton" onclick="cargarDistritosResponsable();">';                   
     $("#cbCantonResponsable").html("");
     for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
         arrayCantonesResponsable[i] = obj.idCanton;
@@ -403,7 +408,6 @@ function siRespuestacargarDistritosResponsable(r){
     var salida = '<select class="form-control" tabindex="-1" id="cbDistritoResponsable" >';                   
     $("#cbDistritoResponsable").html("");
     for (var i = 0; i < doc.length; i++) {
-        var j = i;
         var obj = doc[i];
         salida += '<option value="'+i+'">'+obj.descripcion+'</option>';
         arrayDistritosResponsable[i] = obj.idDistrito;
@@ -448,12 +452,13 @@ function agregarPersona(){
 }
 
 function siRespuestaagregarPersona(r){
-    alert(r);
-    if (tipoMiembro == 1) {
+    console.error(tipoMiembro);
+    if (tipoMiembro == 1){
         agregarMiembroJuvenil();
-    }else{
-        agregarMiembroAdulto();
     }
+    if (tipoMiembro == 2){
+        agregarMiembroAdulto();
+    }  
 }
 
 function agregarMiembroJuvenil(){
@@ -514,5 +519,25 @@ function siRespuestaagregarResponsable(r){
 }
 
 function agregarMiembroAdulto () {
-    
+    console.error("tipoMiembro");
+    console.error(arrayCargos);
+    var idTipoCargo = arrayCargos[document.getElementById('cbCargos').selectedIndex];
+    console.error(idTipoCargo);
+    console.error(document.getElementById('txtIdentificacion').value);
+    var parametros = {
+        opcion : "agregarMiembroAdulto",
+        idPersona: $('#txtIdentificacion').val(),
+        idTipoCargo: idTipoCargo
+    };
+
+    // Realizar la petición
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuestaagregarMiembroAdulto   // Función que se ejecuta cuando el servidor responde
+                          ); 
+}
+
+function siRespuestaagregarMiembroAdulto(r){
+    alert("Adulto agregado");
 }

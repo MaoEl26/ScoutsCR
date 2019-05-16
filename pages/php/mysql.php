@@ -186,6 +186,49 @@ switch ($opcion) {
 		echo "Persona agregada";
 	break;
 
+	case 'agregarResponsable':
+		$nombre = $_POST['nombre'];
+		$primerApellido = $_POST['primerApellido'];
+		$segundoApellido = $_POST['segundoApellido'];
+		$correo = $_POST['correo'];
+		$telefono = $_POST['telefono'];
+		$idDistrito = $_POST['idDistrito'];
+		$detalle = $_POST['detalle'];
+		$idPersona = $_POST['idPersona'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		$mysqli->query("SET @primerApellido  = " . "'" . $mysqli->real_escape_string($primerApellido) . "'");
+		$mysqli->query("SET @segundoApellido  = " . "'" . $mysqli->real_escape_string($segundoApellido) . "'");
+		$mysqli->query("SET @correo  = " . "'" . $mysqli->real_escape_string($correo) . "'");
+		$mysqli->query("SET @telefono  = " . "'" . $mysqli->real_escape_string($telefono) . "'");
+		$mysqli->query("SET @idDistrito  = " . "'" . $mysqli->real_escape_string($idDistrito) . "'");
+		$mysqli->query("SET @detalle  = " . "'" . $mysqli->real_escape_string($detalle) . "'");
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		if(!$mysqli->query("CALL agregarResponsable (@nombre,@primerApellido,@segundoApellido,@correo,@telefono,
+			@idDistrito,@detalle,@idPersona)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la persona ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Responsable agregado";
+	break;
+
+	case 'agregarMiembroAdulto':
+		$idPersona = $_POST['idPersona'];
+		$idTipoCargo = $_POST['idTipoCargo'];
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		$mysqli->query("SET @idTipoCargo  = " . "'" . $mysqli->real_escape_string($idTipoCargo) . "'");		
+		if(!$mysqli->query("CALL agregarMiembroAdulto (@idPersona,@idTipoCargo)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la persona ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Adulto agregado";
+	break;
+
 	case 'agregarEnfermedad':
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");

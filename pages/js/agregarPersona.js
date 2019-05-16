@@ -462,11 +462,6 @@ function agregarMiembroJuvenil(){
     var idNivelEscritura = arrayNivel[document.getElementById('cbEscritura').selectedIndex];
     var idNivelLectura = arrayNivel[document.getElementById('cbLectura').selectedIndex];
     var idNivelComunicacion = arrayNivel[document.getElementById('cbComunicacion').selectedIndex];
-    alert(idSeccion);
-    alert(idEtapa);
-    alert(idNivelEscritura);
-    alert(idNivelLectura);
-    alert(idNivelComunicacion);
     var parametros = {
         opcion : "agregarMiembroJuvenil",
         Identificacion: $('#txtIdentificacion').val(),
@@ -488,7 +483,34 @@ function agregarMiembroJuvenil(){
 }
 
 function siRespuestaagregarMiembroJuvenil(r){
-    alert("Miembro agregado")
+    alert("Miembro agregado");
+    agregarResponsable();
+}
+
+function agregarResponsable(){
+    var idDistrito = arrayDistritosResponsable[document.getElementById('cbDistritoResponsable').selectedIndex];
+    var parametros = {
+        opcion : "agregarResponsable",
+        nombre: $('#txtNombreResponsable').val(),
+        primerApellido: $('#txtPrimerApellidoResponsable').val(),
+        segundoApellido: $('#txtSegundoApellidoResponsable').val(),
+        correo: $('#txtCorreoResponsable').val(),
+        telefono: $('#txtTelefonoResponsable').val(),
+        idDistrito: idDistrito,
+        detalle: $('#txtDireccionResponsable').val(),
+        idPersona: $('#txtIdentificacion').val()
+    };
+
+    // Realizar la petición
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuestaagregarResponsable    // Función que se ejecuta cuando el servidor responde
+                          ); 
+}
+
+function siRespuestaagregarResponsable(r){
+    alert("Responsable agregado");
 }
 
 function agregarMiembroAdulto () {

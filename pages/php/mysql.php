@@ -28,6 +28,15 @@ $opcion = $_POST['opcion'];
 
 switch ($opcion) {
 
+	case  'cargarPersonas':
+		$resultado = $mysqli->query("CALL cargarPersonas()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
 	case  'cargarNumerosGrupos':
 		$resultado = $mysqli->query("CALL cargarNumerosGrupos()");
 		$json = array();

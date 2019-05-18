@@ -256,14 +256,8 @@ function siRespuestacargarCargos(r){
 }
 
 function infoExtra(radio){
-	//$("#informationForm").html("");
 	if (radio.value == 1) {
 		tipoMiembro = 1;
-		//$("#informationForm").html(infoMiembroJuvenil);
-        /*cargarTiposSeccion();
-        cargarEtapasProgresion();
-        cargarNiveles();
-        cargarProvinciasResponsable();*/
         document.getElementById('informationForm').style.display = "block"
         document.getElementById('lblCargos').style.display = "none";
         document.getElementById('cbCargos').style.display = "none";
@@ -271,9 +265,6 @@ function infoExtra(radio){
 	};
 	if (radio.value == 2) {
 		tipoMiembro = 2;
-		//$("#informationForm").html(infoMiembroAdulto);
-		//cargarCargos();
-        //$("#informationForm").html("");
         document.getElementById('informationForm').style.display = "none"
         document.getElementById('lblCargos').style.display = "block";
         document.getElementById('cbCargos').style.display = "block";

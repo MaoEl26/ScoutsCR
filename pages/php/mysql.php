@@ -355,7 +355,7 @@ switch ($opcion) {
     		die();
 		}
 		if($mysqli) $mysqli->close();
-		echo "Vacuna actualizada";
+		echo "Miembro Agregado";
 	break;
 
 	case 'cargarTabla':
@@ -369,30 +369,20 @@ switch ($opcion) {
 		echo json_encode($json) ;
 	break;
 
-	case  'cargarMiembros':
-		$nombre = $_POST['txtNombre'];
-		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
-		$resultado = $mysqli->query("CALL cargarDirigentes(@nombre)");
-		$json = array();
-		while($row = $resultado->fetch_array()){
-			$json[] = $row;
-		}
-		echo json_encode($json) ;
-	break;
 
-	case 'agregarMiembro':
+	case 'promocionarMiembro':
 		$id = $_POST['id'];
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
-		if(!$mysqli->query("CALL agregarAdultoXSeccion(@id,@nombre)"))
+		if(!$mysqli->query("CALL promocionarMiembro(@id,@nombre)"))
 		{
     		if($mysqli) $mysqli->close(); // Close DB connection
     		header('HTTP/1.1 400 Es posible que la vacuna ya exista');
     		die();
 		}
 		if($mysqli) $mysqli->close();
-		echo "Vacuna actualizada";
+		echo "Miembro Promocionado";
 	break;
 
 	case 'cargarTablaMiembros':

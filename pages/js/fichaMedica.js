@@ -5,7 +5,7 @@ $( document ).ready(function() {
     cargarAlergias();
     cargarVacunas();
     cargarTiposSangre();
-    //cargarFichaMedica();
+    cargarFichaMedica();
 });
 
 var arrayPersonas = [];
@@ -20,6 +20,7 @@ var idtipoSangre = 0;
 
 function cargarFichaMedica(){
 	obtenerIdFicha();
+	cargarEnfermedadesFicha();
 }
 
 function obtenerIdFicha(){
@@ -43,6 +44,7 @@ function siRespuestaobtenerIdFicha(r){
 		idFicha = doc[0].idfichaMedica;
 		idtipoSangre = doc[0].idTipoSangre;
 		console.error("ficha cargada");
+		console.error(idFicha);
 	}
 	catch(err) {
 		console.error("crear ficha medica");
@@ -224,18 +226,58 @@ function siRespuestacargarVacunas(r){
 }
 
 function agregarEnfermedad(){
-	var idPersona
-	var idEnfermedad = arrayCargos[document.getElementById('cbCargos').selectedIndex];
-    var parametros = {
-        opcion : "agregarMiembroAdulto",
-        idPersona: $('#txtIdentificacion').val(),
-        idTipoCargo: idTipoCargo
+	var enfermedad = arrayEnfermedad[document.getElementById('cbEnfermedad').selectedIndex];
+	var medicamento = arrayMedicamentos[document.getElementById('cbMedicamentos').selectedIndex];
+	var parametros = {
+        opcion : "agregarEnfermedadFicha",
+        enfermedad: enfermedad,
+        idFicha: idFicha,
+        medicamento: medicamento,
+        dosis: $('#txtDosis').val()
     };
 
     // Realizar la petición
     var post = $.post(
                           "php/mysql.php",    // Script que se ejecuta en el servidor
                           parametros,                              
-                          siRespuestaagregarMiembroAdulto   // Función que se ejecuta cuando el servidor responde
+                          siRespuestaagregarEnfermedad   // Función que se ejecuta cuando el servidor responde
                           ); 
+}
+
+function siRespuestaagregarEnfermedad(r){
+	console.error("enferfedad agregada");
+	cargarEnfermedadesFicha();
+}
+
+function cargarEnfermedadesFicha(){
+	console.error("cargando enferfedades");
+	console.error(idFicha);
+	var parametros = {
+        opcion : "cargarEnferfedadesFicha",
+        idFicha: idFicha
+    };
+
+    // Realizar la petición
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuestacargarEnferfedadesFicha   // Función que se ejecuta cuando el servidor responde
+                          ); 
+}
+
+function siRespuestacargarEnferfedadesFicha(r){
+	try{
+		var doc = JSON.parse(r);
+		var salida = '<table class="table table-striped" id="tbEnfermedad"><thead><tr><th>Enfermedad</th><th>Medicamento</th><th>Dosis</th></tr></thead><tbody>';                   
+		$("#tbEnfermedad").html("");
+		for (var i = 0; i < doc.length; i++) {
+	        var obj = doc[i];
+	        salida += '<tr><td>'+obj.descripcion+'</td><td>'+obj.Descripcion+'</td><td>'+obj.Dosis+'</td></tr>';
+	        //arraySangre[i] = obj.idtipoSangre;
+	    }
+	    salida += "</tbody></table>";
+	    $("#tbEnfermedad").html(salida);
+	}catch (err){
+		$("#tbEnfermedad").html("");
+	}
 }

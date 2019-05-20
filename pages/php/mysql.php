@@ -392,6 +392,36 @@ switch ($opcion) {
 		echo "Miembro Agregado";
 	break;
 
+	case 'cargarEnferfedadesFicha':
+		$idFicha = $_POST['idFicha'];
+		$mysqli->query("SET @idFicha  = " . "'" . $mysqli->real_escape_string($idFicha) . "'");
+		$resultado = $mysqli->query("CALL cargarEnferfedadesFicha(@idFicha)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'agregarEnfermedadFicha':
+		$enfermedad = $_POST['enfermedad'];
+		$idFicha = $_POST['idFicha'];
+		$medicamento = $_POST['medicamento'];
+		$dosis = $_POST['dosis'];
+		$mysqli->query("SET @enfermedad  = " . "'" . $mysqli->real_escape_string($enfermedad) . "'");
+		$mysqli->query("SET @idFicha  = " . "'" . $mysqli->real_escape_string($idFicha) . "'");
+		$mysqli->query("SET @medicamento  = " . "'" . $mysqli->real_escape_string($medicamento) . "'");
+		$mysqli->query("SET @dosis  = " . "'" . $mysqli->real_escape_string($dosis) . "'");
+		if(!$mysqli->query("CALL agregarEnfermedadFicha(@enfermedad,@idFicha,@medicamento,@dosis)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la vacuna ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Miembro Agregado";
+	break;
+
 	case 'cargarTabla':
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
@@ -402,7 +432,6 @@ switch ($opcion) {
 		}
 		echo json_encode($json) ;
 	break;
-
 
 	case 'promocionarMiembro':
 		$id = $_POST['id'];

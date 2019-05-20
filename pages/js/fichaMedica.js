@@ -1,16 +1,99 @@
 $( document ).ready(function() {
+	cargarPersonas();
     cargarEnfermedades();
     cargarMedicamentos();
     cargarAlergias();
     cargarVacunas();
-    cargarPersonas();
+    cargarTiposSangre();
+    //cargarFichaMedica();
 });
 
+var arrayPersonas = [];
 var arrayEnfermedad = [];
 var arrayMedicamentos = [];
 var arrayAlergia = [];
 var arrayVacunas = [];
-var arrayPersonas = [];
+var arraySangre = [];
+
+var idFicha = 0;
+var idtipoSangre = 0;
+
+function cargarFichaMedica(){
+	obtenerIdFicha();
+}
+
+function obtenerIdFicha(){
+	var idPersona = arrayPersonas[document.getElementById('cbPersona').selectedIndex];
+	var parametros = {
+		opcion : "obtenerIdFicha",
+		idPersona: idPersona
+	}
+
+	var post = $.post(
+                         "php/mysql.php",    // Script que se ejecuta en el servidor
+	                     parametros,    	                       
+	                     siRespuestaobtenerIdFicha    // Función que se ejecuta cuando el servidor responde
+                         );
+}
+
+function siRespuestaobtenerIdFicha(r){
+	console.error("ficha");
+	try {
+  		var doc = JSON.parse(r);
+		idFicha = doc[0].idfichaMedica;
+		idtipoSangre = doc[0].idTipoSangre;
+		console.error("ficha cargada");
+	}
+	catch(err) {
+		console.error("crear ficha medica");
+		crearFichaMedica();
+	}
+}
+
+function crearFichaMedica(){
+	var idPersona = arrayPersonas[document.getElementById('cbPersona').selectedIndex];
+	var tipoSangre = arraySangre[document.getElementById('cbSangre').selectedIndex];
+	var parametros = {
+		opcion : "crearFichaMedica",
+		idPersona: idPersona,
+		tipoSangre: tipoSangre
+	}
+
+	var post = $.post(
+                         "php/mysql.php",    // Script que se ejecuta en el servidor
+	                     parametros,    	                       
+	                     siRespuestacrearFichaMedica    // Función que se ejecuta cuando el servidor responde
+                         );
+}
+
+function siRespuestacrearFichaMedica(){
+	console.error("ficha medica creada");
+}
+
+function cargarTiposSangre(){
+	var parametros = {
+		opcion : "cargarTiposSangre"
+	}
+
+	var post = $.post(
+                         "php/mysql.php",    // Script que se ejecuta en el servidor
+	                     parametros,    	                       
+	                     siRespuestacargarTiposSangre    // Función que se ejecuta cuando el servidor responde
+                         );
+}
+
+function siRespuestacargarTiposSangre(r){
+	var doc = JSON.parse(r);
+	var salida = '<select class="form-control" tabindex="-1" id="cbSangre">';                   
+	$("#cbSangre").html("");
+	for (var i = 0; i < doc.length; i++) {
+        var obj = doc[i];
+        salida += '<option value="'+i+'">'+obj.Descripcion+'</option>';
+        arraySangre[i] = obj.idtipoSangre;
+    }
+    salida += "</select>";
+    $("#cbSangre").html(salida);
+}
 
 function cargarPersonas(){
 	var parametros = {
@@ -30,9 +113,9 @@ function siRespuestacargarPersonas(r){
 	$("#cbPersona").html("");
 	for (var i = 0; i < doc.length; i++) {
         var obj = doc[i];
-        var texto = obj.Identificasion + " " + obj.nombre + " " + obj.primerApellido + " " + obj.segundoApellido;
+        var texto = obj.numIdentificacion + " " + obj.nombre + " " + obj.primerApellido + " " + obj.segundoApellido;
         salida += '<option value="'+i+'">'+texto+'</option>';
-        arrayPersonas[i] = obj.Identificasion;
+        arrayPersonas[i] = obj.numIdentificacion;
     }
     salida += "</select>";
     $("#cbPersona").html(salida);
@@ -138,4 +221,21 @@ function siRespuestacargarVacunas(r){
     }
     salida += "</select>";
     $("#cbVacunas").html(salida);
+}
+
+function agregarEnfermedad(){
+	var idPersona
+	var idEnfermedad = arrayCargos[document.getElementById('cbCargos').selectedIndex];
+    var parametros = {
+        opcion : "agregarMiembroAdulto",
+        idPersona: $('#txtIdentificacion').val(),
+        idTipoCargo: idTipoCargo
+    };
+
+    // Realizar la petición
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuestaagregarMiembroAdulto   // Función que se ejecuta cuando el servidor responde
+                          ); 
 }

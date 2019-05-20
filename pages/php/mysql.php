@@ -28,6 +28,25 @@ $opcion = $_POST['opcion'];
 
 switch ($opcion) {
 
+	case  'cargarTiposSangre':
+		$resultado = $mysqli->query("CALL cargarTiposSangre()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'obtenerIdFicha':
+		$idPersona = $_POST['idPersona'];
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		$resultado = $mysqli->query("CALL obtenerIdFicha (@idPersona)");
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
 	case  'cargarPersonas':
 		$resultado = $mysqli->query("CALL cargarPersonas()");
 		$json = array();
@@ -236,6 +255,21 @@ switch ($opcion) {
 		}
 		if($mysqli) $mysqli->close();
 		echo "Adulto agregado";
+	break;
+
+	case 'crearFichaMedica':
+		$idPersona = $_POST['idPersona'];
+		$tipoSangre = $_POST['tipoSangre'];
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		$mysqli->query("SET @tipoSangre  = " . "'" . $mysqli->real_escape_string($tipoSangre) . "'");
+		if(!$mysqli->query("CALL crearFichaMedica (@idPersona,@tipoSangre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la enfermedad ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Ficha medica agregada";
 	break;
 
 	case 'agregarEnfermedad':

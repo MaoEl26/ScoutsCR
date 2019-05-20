@@ -47,148 +47,159 @@
                 <h3>Brújula</h3>
               </div>
             </div>
-            <div class="clearfix"></div>
-            <div class = "x_panel">
-              <div class="x_title">
-                <h2>Niveles</h2>
-                <div class="clearfix"></div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2>Agregar Nivel<small></small></h2>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                      <br />
-                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Nombre <span class="required">*</span></label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="txtNombre" required="required" class="form-control col-md-7 col-xs-12">
-                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+              <div class="clearfix"></div>
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Niveles</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Subniveles</a>
+                        </li>
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                          <div class = "x_panel">
+                            <div class="row">
+                              <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                  <div class="x_title">
+                                    <h2>Agregar<small></small></h2>
+                                    <div class="clearfix"></div>
+                                  </div>
+                                  <div class="x_content">
+                                    <br />
+                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                      <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Nombre <span class="required">*</span></label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <input type="text" id="txtNombre" required="required" class="form-control col-md-7 col-xs-12">
+                                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                        </div>
+                                      </div>
+                                      <div class="ln_solid"></div>
+                                      <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                          <button class="btn btn-primary" type="reset" onclick="limpiar();">Limpiar</button>
+                                          <button type="submit" class="btn btn-success" onclick="agregarNivelBrujula();">Agregar</button>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                  <div class="x_title">
+                                    <h2>Actualizar<small></small></h2>
+                                    <div class="clearfix"></div>
+                                  </div>
+                                  <div class="x_content">
+                                    <br />
+                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                      <div class="form-group">
+                                        <label class="control-label col-md-0 col-sm-3 col-xs-12">Nombre</label>
+                                        <div class="col-md-3 col-sm-6 col-xs-35">
+                                          <select class="form-control" id="cbNiveles"></select>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-md-0 col-sm-3 col-xs-12">Actualización</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <input type="text" id="txtNombreMod" class="form-control col-md-7 col-xs-12">
+                                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <br />
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                          <button class="btn btn-primary" type="reset" onclick="limpiar();">Limpiar</button>
+                                          <button type="submit" class="btn btn-success" onclick="editarNivelBrujula();">Actualizar</button>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div class="ln_solid"></div>
-                        <div class="form-group">
-                          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <button class="btn btn-primary" type="reset" onclick="limpiar();">Limpiar</button>
-                            <button type="submit" class="btn btn-success" onclick="agregarNivelBrujula();">Agregar</button>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                          <div class = "x_panel">
+                            <div class="row">
+                              <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                  <div class="x_title">
+                                    <h2>Agregar<small></small></h2>
+                                    <div class="clearfix"></div>
+                                  </div>
+                                  <div class="x_content">
+                                    <br />
+                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                      <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Nombre <span class="required">*</span></label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <input type="text" id="txtNombreSub" required="required" class="form-control col-md-7 col-xs-12">
+                                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                        </div>
+                                      </div>
+                                      <div class="ln_solid"></div>
+                                      <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                          <button class="btn btn-primary" type="reset" onclick="limpiar();">Limpiar</button>
+                                          <button type="submit" class="btn btn-success" onclick="agregarSubnivelBrujula();">Agregar</button>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                  <div class="x_title">
+                                    <h2>Actualizar<small></small></h2>
+                                    <div class="clearfix"></div>
+                                  </div>
+                                  <div class="x_content">
+                                    <br />
+                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                      <div class="form-group">
+                                        <label class="control-label col-md-0 col-sm-3 col-xs-12">Nombre</label>
+                                        <div class="col-md-3 col-sm-6 col-xs-35">
+                                          <select class="form-control" id="cbSubniveles"></select>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label col-md-0 col-sm-3 col-xs-12">Actualización</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <input type="text" id="txtNombreSubMod" class="form-control col-md-7 col-xs-12">
+                                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <br />
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                          <button class="btn btn-primary" type="reset" onclick="limpiar();">Limpiar</button>
+                                          <button type="submit" class="btn btn-success" onclick="editarSubnivelBrujula();">Actualizar</button>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </form>
+                      </div>
                     </div>
+
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2>Actualizar Nivel<small></small></h2>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                      <br />
-                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <div class="form-group">
-                          <label class="control-label col-md-0 col-sm-3 col-xs-12">Nombre</label>
-                          <div class="col-md-3 col-sm-6 col-xs-35">
-                            <select class="form-control" id="cbNiveles"></select>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-0 col-sm-3 col-xs-12">Actualización</label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="txtNombreMod" class="form-control col-md-7 col-xs-12">
-                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <br />
-                          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <button class="btn btn-primary" type="reset" onclick="limpiar();">Limpiar</button>
-                            <button type="submit" class="btn btn-success" onclick="editarNivelBrujula();">Actualizar</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class = "x_panel">
-              <div class="x_title">
-                <h2>Subniveles</h2>
-                <div class="clearfix"></div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2>Agregar Subnivel<small></small></h2>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                      <br />
-                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Nombre">Nombre <span class="required">*</span></label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="txtNombreSub" required="required" class="form-control col-md-7 col-xs-12">
-                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                          </div>
-                        </div>
-                        <div class="ln_solid"></div>
-                        <div class="form-group">
-                          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <button class="btn btn-primary" type="reset" onclick="limpiar();">Limpiar</button>
-                            <button type="submit" class="btn btn-success" onclick="agregarSubnivelBrujula();">Agregar</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2>Actualizar Subivel<small></small></h2>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                      <br />
-                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <div class="form-group">
-                          <label class="control-label col-md-0 col-sm-3 col-xs-12">Nombre</label>
-                          <div class="col-md-3 col-sm-6 col-xs-35">
-                            <select class="form-control" id="cbSubniveles"></select>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-0 col-sm-3 col-xs-12">Actualización</label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="txtNombreSubMod" class="form-control col-md-7 col-xs-12">
-                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <br />
-                          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <button class="btn btn-primary" type="reset" onclick="limpiar();">Limpiar</button>
-                            <button type="submit" class="btn btn-success" onclick="editarSubnivelBrujula();">Actualizar</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <!-- /page content -->

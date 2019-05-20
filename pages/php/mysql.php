@@ -285,6 +285,73 @@ switch ($opcion) {
 		echo "Enfermedad agregada";
 	break;
 
+	case 'agregarEspecialidadPersona':
+		$id = $_POST['id'];
+		$idPersona = $_POST['idPersona'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		if(!$mysqli->query("CALL agregarEspecialidadPersona(@id,@idPersona)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la enfermedad ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Especialidad Asignada";
+	break;
+
+	case 'agregarRetoEspecialidad':
+		$nombre = $_POST['nombre'];
+		$fecha = $_POST['fecha'];
+		$condicion = $_POST['condicion'];
+		$idEspecialidad = $_POST['idEspecialidad'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		$mysqli->query("SET @fecha  = " . "'" . $mysqli->real_escape_string($fecha) . "'");
+		$mysqli->query("SET @condicion  = " . "'" . $mysqli->real_escape_string($condicion) . "'");
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($idEspecialidad) . "'");
+		if(!$mysqli->query("CALL agregarRetoEspecialidad(@nombre,@fecha,@condicion,@id)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la enfermedad ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Especialidad Asignada";
+	break;
+
+	case  'cargarNombre':
+		$id = $_POST['id'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$resultado = $mysqli->query("CALL cargarNombre(@id)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'cargarTablaEspecialidades':
+		$id = $_POST['id'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$resultado = $mysqli->query("CALL cargarEspecialidadesXPersona(@id)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'cargarTablaRetosEspecialidad':
+		$id = $_POST['id'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$resultado = $mysqli->query("CALL cargarRetoEspecialidad(@id)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
 	case  'cargarEnfermedades':
 		$resultado = $mysqli->query("CALL cargarEnfermedades()");
 		$json = array();

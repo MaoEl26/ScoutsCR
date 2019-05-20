@@ -39,10 +39,10 @@ function cargarTablaMiembros(){
 
 function siRespuestacargarTabla(r){
 	var doc = JSON.parse(r);
-	var salida = '<table class="table table-striped" id="tblDirigentes"><thead><tr><th>Identificación</th>';
+	var salida = '<table class="table table-striped" id="tblMiembros"><thead><tr><th>Identificación</th>';
 	salida+='<th>Nombre</th><th>Opciones</th></tr></thead><tbody>';
 
-  var promocion = '<table class="table table-striped" id="tblDirigentes"><thead><tr><th>Identificación</th>';
+  var promocion = '<table class="table table-striped" id="tblMiembrosPromocion"><thead><tr><th>Identificación</th>';
   promocion+='<th>Nombre</th><th>Promoción</th></tr></thead><tbody>';                  
 
 	$("#tblMiembros").html("");
@@ -74,39 +74,32 @@ function siRespuestacargarTabla(r){
         promocion += '<td>'+obj.numIdentificacion+'</td>';
         promocion += '<td>'+obj.descripcion+'</td>';
         promocion += '<td>'+'<div class="btn-group">'+
-        '<button type="button" class="btn btn-round btn-primary"';
+        '<button type="button" class="btn btn-round btn-primary btn-xs"';
         promocion += 'value="'+obj.numIdentificacion+'" onclick="promocionarMiembro(this);">'+'Promocionar'+'</button>'+
         '</div></td>';
         arrayPromocion[i] = obj.numIdentificacion;
-        salida+='</tr>'
+        promocion+='</tr>'
         
     }
-    salida += "</tbody></table>";
-    $("#tblMiembrosPromocion").html(salida);
+    promocion += "</tbody></table>";
+    $("#tblMiembrosPromocion").html(promocion);
 }
 
 function almacenarValor(button){
   var value = button.value;
   localStorage.setItem("numIdentificacion",value);
-  console.log(value);
 }
 
 function setRefEspecialidad(){
-  var value = "Especialidad";
-  console.log(value);
-  setTimeout("location.hfref='especialidad.html'",0);
+  setTimeout("location.href='especialidad.html'",0);
 }
 
 function setRefBrujula(){
-  var value = "Brujula";
-  console.log(value);
-  setTimeout("location.hfref='brujula.html'",0);
+  setTimeout("location.href='brujula.html'",0);
 }
 
 function setRefBitacora(){
-  var value = "Bitacora";
-  console.log(value);
-  setTimeout("location.hfref='bitacora.html'",0);
+  setTimeout("location.href='bitacora.html'",0);
 }
 
 function siRespuesta(r){

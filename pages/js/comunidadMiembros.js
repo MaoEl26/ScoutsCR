@@ -79,34 +79,27 @@ function siRespuestacargarTabla(r){
         promocion += 'value="'+obj.numIdentificacion+'" onclick="promocionarMiembro(this);">'+'Promocionar'+'</button>'+
         '</div></td>';
         arrayPromocion[i] = obj.numIdentificacion;
-        salida+='</tr>'
+        promocion+='</tr>'
         
     }
-    salida += "</tbody></table>";
-    $("#tblMiembrosPromocion").html(salida);
+    promocion += "</tbody></table>";
+    $("#tblMiembrosPromocion").html(promocion);
 }
 
 function almacenarValor(button){
   var value = button.value;
   localStorage.setItem("numIdentificacion",value);
-  console.log(value);
 }
 
 function setRefEspecialidad(){
-  var value = "Especialidad";
-  console.log(value);
   setTimeout("location.hfref='especialidad.html'",0);
 }
 
 function setRefBrujula(){
-  var value = "Brujula";
-  console.log(value);
   setTimeout("location.hfref='brujula.html'",0);
 }
 
 function setRefBitacora(){
-  var value = "Bitacora";
-  console.log(value);
   setTimeout("location.hfref='bitacora.html'",0);
 }
 

@@ -75,13 +75,15 @@ function siRespuestacargarTabla(r){
         salida+='<tr value="'+i+'">'
         salida += '<td>'+obj.numIdentificacion+'</td>';
         salida += '<td>'+obj.descripcion+'</td>';
-        salida += '<td>'+obj.cargo+'</td>';
+        salida += '<td>'+obj.cargo+'</td>';        
         arrayVacunas[i] = obj.idMiembroAdulto;
         salida+='</tr>'
     }
     salida += "</tbody></table>";
     $("#tblDirigentes").html(salida);
 }
+
+
 
 function siRespuesta(r){
     alert(r);

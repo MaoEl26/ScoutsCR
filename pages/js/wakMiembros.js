@@ -6,6 +6,7 @@ $( document ).ready(function() {
 var arrayMiembros = [];
 var arrayPromocion = [];
 
+
 function promocionarMiembro(button){
 	
 	var id = button.value;
@@ -13,7 +14,7 @@ function promocionarMiembro(button){
     var parametros = {
         opcion : "promocionarMiembro",
         id : id,
-        txtNombre: "Tropa",
+        txtNombre: "Comunidad",
     };
 
     // Realizar la petición
@@ -27,7 +28,7 @@ function promocionarMiembro(button){
 function cargarTablaMiembros(){
 	var parametros = {
 		opcion : "cargarTablaMiembros",
-		txtNombre: "Manada"
+		txtNombre: "Waktzuri"
 	}
 
 	var post = $.post(

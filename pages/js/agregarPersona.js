@@ -450,6 +450,7 @@ function agregar(){
     if (tipoMiembro == 1){
         console.error("Miembro juvenil");
         agregarMiembroJuvenil();
+        agregarResponsable();
     };
     if (tipoMiembro == 2){
         console.error("Miembro adulto");
@@ -485,7 +486,6 @@ function agregarMiembroJuvenil(){
 
 function siRespuestaagregarMiembroJuvenil(r){
     alert("Miembro juvenil agregado");
-    agregarResponsable();
 }
 
 function agregarResponsable(){
@@ -531,5 +531,5 @@ function agregarMiembroAdulto () {
 }
 
 function siRespuestaagregarMiembroAdulto(r){
-    console.error("er agregado");
+    console.error("Adulto agregado");
 }

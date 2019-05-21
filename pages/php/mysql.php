@@ -459,10 +459,32 @@ switch ($opcion) {
 		echo "Miembro Agregado";
 	break;
 
+	case 'cargarAlergiasFicha':
+		$idFicha = $_POST['idFicha'];
+		$mysqli->query("SET @idFicha  = " . "'" . $mysqli->real_escape_string($idFicha) . "'");
+		$resultado = $mysqli->query("CALL cargarAlergiasFicha(@idFicha)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
 	case 'cargarEnferfedadesFicha':
 		$idFicha = $_POST['idFicha'];
 		$mysqli->query("SET @idFicha  = " . "'" . $mysqli->real_escape_string($idFicha) . "'");
 		$resultado = $mysqli->query("CALL cargarEnferfedadesFicha(@idFicha)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case 'cargarVacunasFicha':
+		$idFicha = $_POST['idFicha'];
+		$mysqli->query("SET @idFicha  = " . "'" . $mysqli->real_escape_string($idFicha) . "'");
+		$resultado = $mysqli->query("CALL cargarVacunasFicha(@idFicha)");
 		$json = array();
 		while($row = $resultado->fetch_array()){
 			$json[] = $row;
@@ -487,6 +509,40 @@ switch ($opcion) {
 		}
 		if($mysqli) $mysqli->close();
 		echo "Miembro Agregado";
+	break;
+
+	case 'agregarAlergiaFicha':
+		$alergia = $_POST['alergia'];
+		$idFicha = $_POST['idFicha'];
+		$detalle = $_POST['detalle'];
+		$mysqli->query("SET @alergia  = " . "'" . $mysqli->real_escape_string($alergia) . "'");
+		$mysqli->query("SET @idFicha  = " . "'" . $mysqli->real_escape_string($idFicha) . "'");
+		$mysqli->query("SET @detalle  = " . "'" . $mysqli->real_escape_string($detalle) . "'");
+		if(!$mysqli->query("CALL agregarAlergiaFicha(@alergia,@idFicha,@detalle)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la vacuna ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Alergia Agregado";
+	break;
+
+	case 'agregarVacunaFicha':
+		$vacuna = $_POST['vacuna'];
+		$idFicha = $_POST['idFicha'];
+		$fecha = $_POST['fecha'];
+		$mysqli->query("SET @vacuna  = " . "'" . $mysqli->real_escape_string($vacuna) . "'");
+		$mysqli->query("SET @idFicha  = " . "'" . $mysqli->real_escape_string($idFicha) . "'");
+		$mysqli->query("SET @fecha  = " . "'" . $mysqli->real_escape_string($fecha) . "'");
+		if(!$mysqli->query("CALL agregarVacunaFicha(@vacuna,@idFicha,@fecha)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la vacuna ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Vacuna Agregado";
 	break;
 
 	case 'cargarTabla':

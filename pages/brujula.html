@@ -44,21 +44,85 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Manada</h3>
+                        <h3>Brujula</h3>
+                        <label id="lblNombre">Nombre</label>
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-6">
-                        <div class="x_panel">
-                            <a href="manadaDirigentes.html"><img src="images/JefeYColaborador.png"><center>Jefe y Colaboradores</center></a>
+                <div class="x_panel">
+                  <div class="x_title">
+                    <label id="lblPorcentaje"><h2>Completado: 0%</h2></label>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#bronce" id="bronce-tab" role="tab" data-toggle="tab" aria-expanded="true">Bronce</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#oro" role="tab" id="oro-tab" data-toggle="tab" aria-expanded="false">Oro</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#plata" role="tab" id="plata-tab" data-toggle="tab" aria-expanded="false">Plata</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#platino" role="tab" id="platino-tab" data-toggle="tab" aria-expanded="false">Platino</a>
+                        </li>
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="bronce" aria-labelledby="home-tab">
+                          <div class="x_content">
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
+                              <div class="form-group">
+                                <div class="panel-body">
+                                  <table class="table table-striped" id="tblBronce">
+                                    <thead><tr><th><th>Area</th><th>Porcentaje</th><th>Nuevo Reto</th><th>Listado Retos</th></tr></thead>
+                                  </table>
+                                </div>
+                              </div>                  
+                            </form>
+                          </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-6">
-                        <div class="x_panel">
-                            <a href="manadaMiembros.html"><img src="images/MiembrosJuveniles.png"><center>Miembros Juveniles</center></a>
+                        <div role="tabpanel" class="tab-pane fade" id="oro" aria-labelledby="profile-tab">
+                          <div class="x_content">
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
+                              <div class="form-group">
+                                <div class="panel-body">
+                                  <table class="table table-striped" id="tblOro">
+                                    <thead><tr><th><th>Area</th><th>Porcentaje</th><th>Nuevo Reto</th><th>Listado Retos</th></tr></thead>
+                                  </table>
+                                </div>
+                              </div>                  
+                            </form>
+                          </div>
                         </div>
+                        <div role="tabpanel" class="tab-pane fade" id="plata" aria-labelledby="profile-tab">
+                          <div class="x_content">
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
+                              <div class="form-group">
+                                <div class="panel-body">
+                                  <table class="table table-striped" id="tblPlata">
+                                    <thead><tr><th><th>Area</th><th>Porcentaje</th><th>Nuevo Reto</th><th>Listado Retos</th></tr></thead>
+                                  </table>
+                                </div>
+                              </div>                  
+                            </form>
+                          </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="platino" aria-labelledby="profile-tab">
+                          <div class="x_content">
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
+                              <div class="form-group">
+                                <div class="panel-body">
+                                  <table class="table table-striped" id="tblPlatino">
+                                    <thead><tr><th><th>Area</th><th>Porcentaje</th><th>Nuevo Reto</th><th>Listado Retos</th></tr></thead>
+                                  </table>
+                                </div>
+                              </div>                  
+                            </form>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+
+                  </div>
                 </div>
               </div>
             </div>

@@ -533,3 +533,12 @@ function agregarMiembroAdulto () {
 function siRespuestaagregarMiembroAdulto(r){
     console.error("Adulto agregado");
 }
+
+function crearBitacora(){
+    var parametros = {
+        opcion: "agregarBitacora",
+        Identificacion: $('#txtIdentificacion').val()
+    };
+
+    var post = 
+}

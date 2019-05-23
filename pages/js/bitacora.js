@@ -92,21 +92,22 @@ function siRespuestacargarTabla(r){
     $("#tblEspecialidades").html(salida);
 }
 
+//--- ACCIONES BOTONES -----
+
 function almacenarReto(button){
   var value = button.value;
-  localStorage.setItem("idTipoEspecialidadXPersona",value);
-  setTimeout("location.href='nuevoRetoEspecialidad.html'",0);
+  localStorage.setItem("idTipoAreaXBitacoraTipoBitacora",value);
+  setTimeout("location.href='nuevoRetoBitacora.html'",0);
 }
 
 function listaRetos(button){
   var value = button.value;
-  localStorage.setItem("idTipoEspecialidadXPersona",value);
-  setTimeout("location.href='listaRetos.html'",0);
+  localStorage.setItem("idTipoAreaXBitacoraTipoBitacora",value);
+  setTimeout("location.href='listaRetosBitacora.html'",0);
 }
 
 function siRespuesta(r){
     alert(r);
     cargarTablaEspecialidades();
-    cargarEspecialidades();
     cargarNombre();
 }

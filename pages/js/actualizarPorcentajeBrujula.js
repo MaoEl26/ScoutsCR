@@ -2,40 +2,29 @@ $( document ).ready(function() {
     cargarNombre();
 });
 
-var identificacion = localStorage.getItem("idTipoEspecialidadXPersona");
+var identificacion = localStorage.getItem("idTipoAreaXBitacoraTipoBitacora");
 var numIdentificacion = localStorage.getItem("numIdentificacion");
 
-var valCondicion;
-var arrayEspecialidad = [];
-var arrayEspecialidadPersona = [];
-
-function infoExtra(radio){
-  valCondicion = radio.value;
-  console.log(valCondicion);
-}
-
 function limpiar(){
-  document.getElementById('txtNombre').value = "";
-  document.getElementById('txtFecha').value = "";
+  document.getElementById('txtPorcentaje').value = "";
 }
 
-function agregarRetoEspecialidad(){
+function actualizarPorcentajeSubBitacora(button){
+  
+  var id = button.value;
+    console.log(id);
+    var parametros = {
+        opcion : "actualizarPorcentajeSubBitacora",
+        id : id,
+        txtNombre: $('#txtNombre').val(),,
+    };
 
-      var parametros = {
-          opcion : "agregarRetoEspecialidad",
-          nombre : $('#txtNombre').val(),
-          fecha: $('#single_cal2').val(),
-          condicion: valCondicion,
-          idEspecialidad : identificacion
-      };
-
-      // Realizar la petición
-      var post = $.post(
-                            "php/mysql.php",    // Script que se ejecuta en el servidor
-                            parametros,                              
-                            siRespuesta    // Función que se ejecuta cuando el servidor responde
-                            );  
-      console.log($('#txtFecha').val());
+    // Realizar la petición
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuesta    // Función que se ejecuta cuando el servidor responde
+                          );  
 }
 
 function cargarNombre(){

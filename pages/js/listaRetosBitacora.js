@@ -4,7 +4,7 @@ $( document ).ready(function() {
 });
 
 var numIdentificacion = localStorage.getItem("numIdentificacion");
-var identificacion = localStorage.getItem("idTipoEspecialidadXPersona");
+var identificacion = localStorage.getItem("idTipoAreaXBitacoraTipoBitacora");
 
 var arrayRetos = [];
 
@@ -36,7 +36,7 @@ function siRespuestacargarNombre(r){
 
 function cargarTablaRetosEspecialidad(){
 	var parametros = {
-		opcion : "cargarTablaRetosEspecialidad",
+		opcion : "cargarTablaRetos",
 		id: identificacion
 	}
 
@@ -50,7 +50,7 @@ function cargarTablaRetosEspecialidad(){
 function siRespuestacargarTabla(r){
 	var doc = JSON.parse(r);
 	var salida = '<table class="table table-striped" id="tblRetos"><thead><tr><th>Nombre</th>';
-	salida+='<th>Fecha</th><th>Condición</th></tr></thead><tbody>';
+	salida+='<th>Fecha</th><th>Porcentaje</th></tr></thead><tbody>';
               
   $("#tblRetos").html("");
   for (var i = 0; i < doc.length; i++) {
@@ -59,7 +59,7 @@ function siRespuestacargarTabla(r){
         salida +='<tr value="'+i+'">'
         salida += '<td>'+obj.nombre+'</td>';
         salida += '<td>'+obj.fecha+'</td>';
-        salida += '<td>'+obj.condicion+'</td>';
+        salida += '<td>'+obj.porcentaje+'</td>';
         arrayRetos[i] = obj.idTipoEspecialidadXPersona;
         salida +='</tr>'
         

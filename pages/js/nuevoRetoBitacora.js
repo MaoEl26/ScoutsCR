@@ -2,31 +2,24 @@ $( document ).ready(function() {
     cargarNombre();
 });
 
-var identificacion = localStorage.getItem("idTipoEspecialidadXPersona");
+var identificacion = localStorage.getItem("idTipoAreaXBitacoraTipoBitacora");
 var numIdentificacion = localStorage.getItem("numIdentificacion");
 
-var valCondicion;
-var arrayEspecialidad = [];
-var arrayEspecialidadPersona = [];
-
-function infoExtra(radio){
-  valCondicion = radio.value;
-  console.log(valCondicion);
-}
 
 function limpiar(){
   document.getElementById('txtNombre').value = "";
   document.getElementById('txtFecha').value = "";
+  document.getElementById('txtPorcentaje').value = "";
 }
 
-function agregarRetoEspecialidad(){
+function agregarRetoBitacora(){
 
       var parametros = {
-          opcion : "agregarRetoEspecialidad",
+          opcion : "agregarRetoBitacora",
           nombre : $('#txtNombre').val(),
           fecha: $('#single_cal2').val(),
-          condicion: valCondicion,
-          idEspecialidad : identificacion
+          Porcentaje: $('#txtPorcentaje').val(),
+          id : identificacion
       };
 
       // Realizar la petición

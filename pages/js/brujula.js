@@ -92,16 +92,10 @@ function siRespuestacargarTabla(r){
     $("#tblEspecialidades").html(salida);
 }
 
-function almacenarReto(button){
+function actualizar(button){ //--- ACCION DEL BOTÓN
   var value = button.value;
-  localStorage.setItem("idTipoEspecialidadXPersona",value);
-  setTimeout("location.href='nuevoRetoEspecialidad.html'",0);
-}
-
-function listaRetos(button){
-  var value = button.value;
-  localStorage.setItem("idTipoEspecialidadXPersona",value);
-  setTimeout("location.href='listaRetos.html'",0);
+  localStorage.setItem("idTipoAreaXBitacoraTipoBitacora",value);
+  setTimeout("location.href='actualizarPorcentajeBrujula.html'",0);
 }
 
 function siRespuesta(r){

@@ -33,6 +33,14 @@ var tipoMiembro = 1;
 var genero = 0;
 var cargo = 0;
 
+var Niveles = [];
+var SubNiviles =[];
+
+var contadorNivel = 0;
+var contadorSubnivel = 0;
+var maxContadorNivel = 0;
+var maxContadorSubnivel = 0;
+
 function cargarNumerosGrupos(){
     var parametros = {
         opcion : "cargarNumerosGrupos"
@@ -485,7 +493,7 @@ function agregarMiembroJuvenil(){
 }
 
 function siRespuestaagregarMiembroJuvenil(r){
-    alert("Miembro juvenil agregado");
+    console.log("Miembro juvenil agregado");
 }
 
 function agregarResponsable(){
@@ -511,7 +519,8 @@ function agregarResponsable(){
 }
 
 function siRespuestaagregarResponsable(r){
-    console.error("Responsable agregado");
+    console.log("Responsable agregado");
+    agregarBitacoraBrujula();
 }
 
 function agregarMiembroAdulto () {
@@ -534,11 +543,168 @@ function siRespuestaagregarMiembroAdulto(r){
     console.error("Adulto agregado");
 }
 
-function crearBitacora(){
+//---------------------------------------------------------------------------------------------------
+function agregarBitacoraBrujula(){
     var parametros = {
         opcion: "agregarBitacora",
         Identificacion: $('#txtIdentificacion').val()
     };
 
-    var post = 
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuestaCrearBitacoraBrujula  // Función que se ejecuta cuando el servidor responde
+                          ); 
+}
+
+function siRespuestaCrearBitacoraBrujula(r){
+    console.log("bitacora agregada");
+
+    var parametros = {
+        opcion: "cargarNivelesBrujula"
+    };
+
+    var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
+                        parametros,                              
+                        siRespuestaCargarNivelesBrujula);
+}
+
+function siRespuestaCargarNivelesBrujula(r){
+    console.error("niveles brujula cargados");
+    Niveles =JSON.parse(r);
+    maxContadorNivel = Niveles.length;
+    console.error("maxContadorNivel "+contadorNivel);
+    var parametros = {
+        opcion: "cargarSubnivelesBrujula"
+    };
+
+    var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
+                        parametros,                              
+                        siRespuestaCargarSubnivelesBrujula); 
+}
+
+function siRespuestaCargarSubnivelesBrujula(r){
+    console.error("SubNiviles brujula cargados");
+    SubNiviles = JSON.parse(r);
+    maxContadorSubnivel = SubNiviles.length;
+    console.error("maxContadorSubnivel "+contadorSubnivel);
+    agregarNivelesBrujula();
+}
+
+function agregarNivelesBrujula(){
+   if(contadorNivel < maxContadorNivel){
+       var parametros = {
+            opcion: "agregarBitacoraPersona",
+            nivel: Niveles[contadorNivel].idTipoBitacora,
+            Identificacion: $('#txtIdentificacion').val()
+        };
+
+        var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
+                            parametros,                              
+                            siRespuestaAgregarSubnivelesBrujula);  
+        }else{
+            contadorNivel = 0;
+            contadorSubnivel = 0;
+            SubNiviles = [];
+            Niveles = [];
+            agregarBitacora();
+        }
+}
+
+function agregarSubnivelesBrujula(){
+    if (contadorSubnivel < maxContadorSubnivel){
+        var parametros = {
+            opcion: "agregarSubBitacoraPersona",
+            nivel: SubNiveles[contadorNivel].idTipoArea,
+            Identificacion: $('#txtIdentificacion').val()
+        };
+        contadorSubnivel+=1;
+        var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
+                            parametros,                              
+                            siRespuestaAgregarSubnivelesBrujula);  
+        }else{
+            contadorNivel+=1;
+            agregarNivelesBrujula();
+        }
+}
+// ------------------------------------------------------------------------------------
+function agregarBitacora(){
+    var parametros = {
+        opcion: "agregarBitacora",
+        Identificacion: $('#txtIdentificacion').val()
+    };
+
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuestaCrearBitacora   // Función que se ejecuta cuando el servidor responde
+                          ); 
+}
+
+function siRespuestaCrearBitacora(r){
+    console.log("Adulto agregado");
+
+    var parametros = {
+        opcion: "cargarNivelesBitacora"
+    };
+
+    var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
+                        parametros,                              
+                        siRespuestaCargarNivelesBitacora);
+}
+
+function siRespuestaCargarNivelesBitacora(r){
+    Niveles =JSON.parse(r);
+    maxContadorNivel = Niveles.length;
+    var parametros = {
+        opcion: "cargarSubnivelesBitacora"
+    };
+
+    var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
+                        parametros,                              
+                        siRespuestaCargarSubnivelesBitacora); 
+}
+
+function siRespuestaCargarSubnivelesBitacora(r){
+    SubNiviles = JSON.parse(r);
+    maxContadorSubnivel = SubNiviles.length;
+    console.log("maxContadorNivel "+contadorNivel);
+    console.log("maxContadorSubnivel "+contadorSubnivel);
+    agregarNivelesBitacora();
+}
+
+function agregarNivelesBitacora(){
+   if(contadorNivel < maxContadorNivel){
+       var parametros = {
+            opcion: "agregarBitacoraPersona",
+            nivel: Niveles[contadorNivel].idTipoBitacora,
+            Identificacion: $('#txtIdentificacion').val()
+        };
+
+        var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
+                            parametros,                              
+                            siRespuestaAgregarSubnivelesBitacora);  
+        }else{
+            contadorNivel = 0;
+            contadorSubnivel = 0;
+            SubNiviles = [];
+            Niveles = [];
+        }
+}
+
+function agregarSubnivelesBitacora(){
+    if (contadorSubnivel < maxContadorSubnivel){
+        var parametros = {
+            opcion: "agregarSubBitacoraPersona",
+            nivel: SubNiveles[contadorNivel].idTipoArea,
+            Identificacion: $('#txtIdentificacion').val()
+        };
+        contadorSubnivel+=1;
+        var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
+                            parametros,                              
+                            siRespuestaAgregarSubnivelesBitacora);  
+        }else{
+            contadorNivel+=1;
+            agregarNivelesBitacora();
+        }
 }

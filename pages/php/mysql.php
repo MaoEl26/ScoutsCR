@@ -893,6 +893,50 @@ switch ($opcion) {
 		echo "Grupo agregado";
 	break;
 
+	case 'agregarBitacora':
+		$id = $_POST['Identificacion'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		if(!$mysqli->query("CALL agregarBitacora(@id)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el nivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Bitacora agregada";
+	break;
+
+	case 'agregarBitacoraPersona':
+		$id = $_POST['Identificacion'];
+		$nivel = $_POST['nivel'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nivel  = " . "'" . $mysqli->real_escape_string($nivel) . "'");
+		if(!$mysqli->query("CALL agregarBitacoraTipoBitacora(@id,@nivel)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el nivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Nivel de Bitacora agregado";
+	break;
+
+	case 'agregarSubBitacoraPersona':
+		$id = $_POST['Identificacion'];
+		$nivel = $_POST['nivel'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nivel  = " . "'" . $mysqli->real_escape_string($nivel) . "'");
+		if(!$mysqli->query("CALL agregarBitacoraTipoArea(@id,@nivel)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el nivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Nivel de Bitacora agregado";
+	break;
+
+
 	default:
 		# code...
 		break;

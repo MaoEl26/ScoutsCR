@@ -50,10 +50,6 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="x_panel">
-                  <div class="x_title">
-                    <label id="lblPorcentaje"><h2>Completado: 0%</h2></label>
-                    <div class="clearfix"></div>
-                  </div>
                   <div class="x_content">
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                       <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
@@ -72,8 +68,19 @@
                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
                               <div class="form-group">
                                 <div class="panel-body">
+                                    <div class="x_title">
+                                        <label id="lblPorcentajeBronce"><h2>Completado: 0%</h2></label>
+                                        <div class="clearfix"></div>
+                                    </div>
                                   <table class="table table-striped" id="tblBronce">
-                                    <thead><tr><th><th>Area</th><th>Porcentaje</th><th>Nuevo Reto</th><th>Listado Retos</th></tr></thead>
+                                    <thead><tr><th>Area</th><th>Porcentaje</th><th>Actualizar</th></tr></thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Historia,guía y scout</td>
+                                            <td>0%</td>
+                                            <td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="idTipoAreaXBitacoraTipoBitacora" onclick="location.href='actualizarPorcentajeBrujula.html'">Actualizar</button></div></td>
+                                        </tr>
+                                    </tbody>
                                   </table>
                                 </div>
                               </div>                  
@@ -85,8 +92,19 @@
                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
                               <div class="form-group">
                                 <div class="panel-body">
+                                    <div class="x_title">
+                                        <label id="lblPorcentajeOro"><h2>Completado: 0%</h2></label>
+                                        <div class="clearfix"></div>
+                                    </div>
                                   <table class="table table-striped" id="tblOro">
-                                    <thead><tr><th><th>Area</th><th>Porcentaje</th><th>Nuevo Reto</th><th>Listado Retos</th></tr></thead>
+                                    <thead><tr><th>Area</th><th>Porcentaje</th><th>Actualizar</th></tr></thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Historia,guía y scout</td>
+                                            <td>0%</td>
+                                            <td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="idTipoAreaXBitacoraTipoBitacora" onclick="almacenarReto(this);">Actualizar</button></div></td>
+                                        </tr>
+                                    </tbody>
                                   </table>
                                 </div>
                               </div>                  
@@ -98,8 +116,19 @@
                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
                               <div class="form-group">
                                 <div class="panel-body">
+                                    <div class="x_title">
+                                        <label id="lblPorcentajePlata"><h2>Completado: 0%</h2></label>
+                                        <div class="clearfix"></div>
+                                    </div>
                                   <table class="table table-striped" id="tblPlata">
-                                    <thead><tr><th><th>Area</th><th>Porcentaje</th><th>Nuevo Reto</th><th>Listado Retos</th></tr></thead>
+                                    <thead><tr><th>Area</th><th>Porcentaje</th><th>Actualizar</th></tr></thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Historia,guía y scout</td>
+                                            <td>0%</td>
+                                            <td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="idTipoAreaXBitacoraTipoBitacora" onclick="almacenarReto(this);">Actualizar</button></div></td>
+                                        </tr>
+                                    </tbody>
                                   </table>
                                 </div>
                               </div>                  
@@ -111,8 +140,19 @@
                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">  
                               <div class="form-group">
                                 <div class="panel-body">
+                                    <div class="x_title">
+                                        <label id="lblPorcentajePlatino"><h2>Completado: 0%</h2></label>
+                                        <div class="clearfix"></div>
+                                    </div>
                                   <table class="table table-striped" id="tblPlatino">
-                                    <thead><tr><th><th>Area</th><th>Porcentaje</th><th>Nuevo Reto</th><th>Listado Retos</th></tr></thead>
+                                    <thead><tr><th>Area</th><th>Porcentaje</th><th>Actualizar</th></tr></thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Historia,guía y scout</td>
+                                            <td>0%</td>
+                                            <td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="idTipoAreaXBitacoraTipoBitacora" onclick="almacenarReto(this);">Actualizar</button></div></td>
+                                        </tr>
+                                    </tbody>
                                   </table>
                                 </div>
                               </div>                  
@@ -170,5 +210,6 @@
     <script src="../vendors/validator/validator.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <script src="js/brujula.js"></script>
   </body>
 </html>

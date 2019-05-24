@@ -971,6 +971,33 @@ switch ($opcion) {
 		echo "Nivel de Bitacora agregado";
 	break;
 
+	case  'cargarBitacoraPersona':
+		$tipoUso = $_POST['tipoUso'];
+		$idPersona = $_POST['idPersona'];
+		$mysqli->query("SET @tipoUso  = " . "'" . $mysqli->real_escape_string($tipoUso) . "'");
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		$resultado = $mysqli->query("CALL cargarBitacora(@idPersona,@tipoUso)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'cargarSubBitacoraPersona':
+		$tipoUso = $_POST['tipoUso'];
+		$idPersona = $_POST['idPersona'];
+		$idBitacora = $_POST['idBitacora'];
+		$mysqli->query("SET @tipoUso  = " . "'" . $mysqli->real_escape_string($tipoUso) . "'");
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		$mysqli->query("SET @idBitacora  = " . "'" . $mysqli->real_escape_string($idBitacora) . "'");
+		$resultado = $mysqli->query("CALL cargarSubBitacora(@idPersona,@tipoUso,@idBitacora)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
 
 	default:
 		# code...

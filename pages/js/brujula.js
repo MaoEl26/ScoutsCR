@@ -94,7 +94,7 @@ function siRespuestacargarSubBitacora(r){
   for (var i = 0; i < doc.length; i++) {
         var obj = doc[i];
         salidaTab += '<tr><td>'+obj.descripcion+'</td><td>'+obj.porcentaje+'%</td>';
-        salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="location.href="actualizarPorcentajeBrujula.html"">Actualizar</button></div></td>'
+        salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="location.href='+"'actualizarPorcentajeBrujula.html'"+'>Actualizar</button></div></td>';
         salidaTab += '</tr>';                
   }
   salidaTab += "</tbody></table>";            

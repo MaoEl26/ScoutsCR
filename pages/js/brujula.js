@@ -6,6 +6,12 @@ var numIdentificacion = localStorage.getItem("numIdentificacion");
 
 var arrayEspecialidad = [];
 var arrayEspecialidadPersona = [];
+var arrayBitacoras = [];
+var arrayBitacorasPorcentajes = [];
+
+function cargarBitacoras(){
+  var tipoUso = 1;
+}
 
 function agregarEspecialidadPersona(){
 	

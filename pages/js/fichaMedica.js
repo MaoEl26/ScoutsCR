@@ -5,7 +5,7 @@ $( document ).ready(function() {
     cargarAlergias();
     cargarVacunas();
     cargarTiposSangre();
-    //cargarFichaMedica();
+    cargarPrimeraFicha();
 });
 
 var arrayPersonas = [];
@@ -18,15 +18,75 @@ var arraySangre = [];
 var idFicha = 0;
 var idtipoSangre = 0;
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function cargarPersonas(){
+	console.log("cargar personas");
+	var parametros = {
+		opcion : "cargarPersonas"
+	}
+
+	var post = $.post(
+                         "php/mysql.php",    // Script que se ejecuta en el servidor
+	                     parametros,    	                       
+	                     siRespuestacargarPersonas    // Función que se ejecuta cuando el servidor responde
+                         );
+}
+
+function siRespuestacargarPersonas(r){
+	console.log("si respuesta cargar personas");
+	var doc = JSON.parse(r);
+	var salida = '<select class="form-control" tabindex="-1" id="cbPersona">';                   
+	$("#cbPersona").html("");
+	for (var i = 0; i < doc.length; i++) {
+        var obj = doc[i];
+        var texto = obj.numIdentificacion + " " + obj.nombre + " " + obj.primerApellido + " " + obj.segundoApellido;
+        salida += '<option value="'+i+'">'+texto+'</option>';
+        arrayPersonas[i] = obj.numIdentificacion;
+    }
+    salida += "</select>";
+    $("#cbPersona").html(salida);
+}
+
 function cargarFichaMedica(){
 	obtenerIdFicha();
+	$("#tbEnfermedad").html("");
 	cargarEnfermedadesFicha();
+	$("#tbAlergia").html("");
 	cargarAlergiasFicha();
+	$("#tbVacuna").html("");
 	cargarVacunasFicha();
+	setSangre();
+}
+
+async function cargarPrimeraFicha(){
+	await sleep(5000);
+	obtenerIdFicha();
+	$("#tbEnfermedad").html("");
+	await sleep(2000);
+	cargarEnfermedadesFicha();
+	$("#tbAlergia").html("");
+	cargarAlergiasFicha();
+	$("#tbVacuna").html("");
+	cargarVacunasFicha();
+	setSangre();
+}
+
+function setSangre(){
+	for (var i = 0; i <= arraySangre.length; i++) {
+		if (arraySangre[i] == idtipoSangre) {
+			document.getElementById('cbSangre').selectedIndex = i;
+		};
+	};
 }
 
 function obtenerIdFicha(){
+	console.log(arrayPersonas);
 	var idPersona = arrayPersonas[document.getElementById('cbPersona').selectedIndex];
+	console.log("persona ");
+	console.log(idPersona);
 	var parametros = {
 		opcion : "obtenerIdFicha",
 		idPersona: idPersona
@@ -40,16 +100,16 @@ function obtenerIdFicha(){
 }
 
 function siRespuestaobtenerIdFicha(r){
-	console.error("ficha");
+	console.log("ficha");
 	try {
   		var doc = JSON.parse(r);
 		idFicha = doc[0].idfichaMedica;
 		idtipoSangre = doc[0].idTipoSangre;
-		console.error("ficha cargada");
-		console.error(idFicha);
+		console.log("ficha cargada");
+		console.log(idFicha);
 	}
 	catch(err) {
-		console.error("crear ficha medica");
+		console.log("crear ficha medica");
 		crearFichaMedica();
 	}
 }
@@ -71,7 +131,7 @@ function crearFichaMedica(){
 }
 
 function siRespuestacrearFichaMedica(){
-	console.error("ficha medica creada");
+	console.log("ficha medica creada");
 }
 
 function cargarTiposSangre(){
@@ -99,30 +159,25 @@ function siRespuestacargarTiposSangre(r){
     $("#cbSangre").html(salida);
 }
 
-function cargarPersonas(){
+function actualizarFicha(){
+	var tipoSangre = arraySangre[document.getElementById('cbSangre').selectedIndex];
+	console.log(idFicha);
+	console.log(tipoSangre);
 	var parametros = {
-		opcion : "cargarPersonas"
+		opcion : "actualizarFicha",
+		idFicha: idFicha,
+		tipoSangre: tipoSangre
 	}
 
 	var post = $.post(
                          "php/mysql.php",    // Script que se ejecuta en el servidor
 	                     parametros,    	                       
-	                     siRespuestacargarPersonas    // Función que se ejecuta cuando el servidor responde
+	                     siRespuestaactualizarFicha    // Función que se ejecuta cuando el servidor responde
                          );
 }
 
-function siRespuestacargarPersonas(r){
-	var doc = JSON.parse(r);
-	var salida = '<select class="form-control" tabindex="-1" id="cbPersona">';                   
-	$("#cbPersona").html("");
-	for (var i = 0; i < doc.length; i++) {
-        var obj = doc[i];
-        var texto = obj.numIdentificacion + " " + obj.nombre + " " + obj.primerApellido + " " + obj.segundoApellido;
-        salida += '<option value="'+i+'">'+texto+'</option>';
-        arrayPersonas[i] = obj.numIdentificacion;
-    }
-    salida += "</select>";
-    $("#cbPersona").html(salida);
+function siRespuestaactualizarFicha(r){
+	console.log("ficha actualizada");
 }
 
 function cargarEnfermedades(){
@@ -247,12 +302,12 @@ function agregarEnfermedad(){
 }
 
 function siRespuestaagregarEnfermedad(r){
-	console.error("enferfedad agregada");
+	console.log("enferfedad agregada");
 	cargarEnfermedadesFicha();
 }
 
 function cargarEnfermedadesFicha(){
-	console.error("cargando enferfedades");
+	console.log("cargando enferfedades");
 	var parametros = {
         opcion : "cargarEnferfedadesFicha",
         idFicha: idFicha
@@ -284,7 +339,7 @@ function siRespuestacargarEnferfedadesFicha(r){
 }
 
 function cargarAlergiasFicha(){
-	console.error("cargando alergias");
+	console.log("cargando alergias");
 	var parametros = {
         opcion : "cargarAlergiasFicha",
         idFicha: idFicha
@@ -333,12 +388,12 @@ function agregarAlergia(){
 }
 
 function siRespuestaagregarAlergiaFicha(r){
-	console.error("alergia agregada");
+	console.log("alergia agregada");
 	cargarAlergiasFicha();
 }
 
 function cargarVacunasFicha(){
-	console.error("cargando vacunas");
+	console.log("cargando vacunas");
 	var parametros = {
         opcion : "cargarVacunasFicha",
         idFicha: idFicha
@@ -387,6 +442,6 @@ function agregarVacuna(){
 }
 
 function siRespuestaagregarVacuna(r){
-	console.error("vacuna agregada");
+	console.log("vacuna agregada");
 	cargarVacunasFicha();
 }

@@ -272,6 +272,21 @@ switch ($opcion) {
 		echo "Ficha medica agregada";
 	break;
 
+	case 'actualizarFicha':
+		$idFicha = $_POST['idFicha'];
+		$tipoSangre = $_POST['tipoSangre'];
+		$mysqli->query("SET @idFicha  = " . "'" . $mysqli->real_escape_string($idFicha) . "'");
+		$mysqli->query("SET @tipoSangre  = " . "'" . $mysqli->real_escape_string($tipoSangre) . "'");
+		if(!$mysqli->query("CALL actualizarFicha (@idFicha,@tipoSangre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la enfermedad ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Ficha medica actualizada";
+	break;
+
 	case 'agregarEnfermedad':
 		$nombre = $_POST['txtNombre'];
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");

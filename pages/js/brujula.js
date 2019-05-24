@@ -65,7 +65,7 @@ function cargarSubBitacoras(){
     cargarSubBitacora(i);
     salidaTab += '</div></div></form></div></div>';
   };
-  salidaTab += '</div>'
+  salidaTab += '</div>';
   $("#myTabContent").html(salidaTab);
 }
 

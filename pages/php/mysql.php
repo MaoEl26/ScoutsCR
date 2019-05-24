@@ -334,6 +334,26 @@ switch ($opcion) {
 		echo "Especialidad Asignada";
 	break;
 
+	case 'agregarRetoBitacora':
+		$nombre = $_POST['nombre'];
+		$fecha = $_POST['fecha'];
+		$porcentaje = $_POST['porcentaje'];
+		$idEspecialidad = $_POST['id'];
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		$mysqli->query("SET @fecha  = " . "'" . $mysqli->real_escape_string($fecha) . "'");
+		$mysqli->query("SET @condicion  = " . "'" . $mysqli->real_escape_string($condicion) . "'");
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		if(!$mysqli->query("CALL agregarRetoEspecialidad(@nombre,@fecha,@condicion,@id)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la enfermedad ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Reto Agregado";
+	break;
+
+
 	case  'cargarNombre':
 		$id = $_POST['id'];
 		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
@@ -577,6 +597,21 @@ switch ($opcion) {
 		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
 		if(!$mysqli->query("CALL promocionarMiembro(@id,@nombre)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que la vacuna ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Miembro Promocionado";
+	break;
+
+	case 'actualizarPorcentajeSubBitacora':
+		$id = $_POST['id'];
+		$nombre = $_POST['txtNombre'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
+		if(!$mysqli->query("CALL actualizarPorcentajeSubBitacora(@id,@nombre)"))
 		{
     		if($mysqli) $mysqli->close(); // Close DB connection
     		header('HTTP/1.1 400 Es posible que la vacuna ya exista');

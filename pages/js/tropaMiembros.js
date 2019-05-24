@@ -92,15 +92,15 @@ function almacenarValor(button){
 }
 
 function setRefEspecialidad(){
-  setTimeout("location.hfref='especialidad.html'",0);
+  setTimeout("location.href='especialidad.html'",0);
 }
 
 function setRefBrujula(){
-  setTimeout("location.hfref='brujula.html'",0);
+  setTimeout("location.href='brujula.html'",0);
 }
 
 function setRefBitacora(){
-  setTimeout("location.hfref='bitacora.html'",0);
+  setTimeout("location.href='bitacora.html'",0);
 }
 
 function siRespuesta(r){

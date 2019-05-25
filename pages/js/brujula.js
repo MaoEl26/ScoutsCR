@@ -1,18 +1,29 @@
 $( document ).ready(function() {
     cargarNombre();
-    cargarBitacoras();
-    cargarSubBitacoras();
+    controladora();
 });
 
 var numIdentificacion = localStorage.getItem("numIdentificacion");
 var tipoUso = 1;
 var salidaTab = "";
+var descripcionText = "";
 
 var arrayEspecialidad = [];
 var arrayEspecialidadPersona = [];
 var arrayBitacoras = [];
 var arrayBitacorasPorcentajes = [];
 var arrayBitacorasDescripciones = [];
+
+
+async function controladora(){
+  cargarBitacoras();
+  await sleep(5000);
+  cargarSubBitacoras();
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function cargarBitacoras(){
   var parametros = {
@@ -48,7 +59,7 @@ function cargarSubBitacoras(){
   $("#myTabContent").html("");
   var salidaTab = '<div id="myTabContent" class="tab-content">';  
   for (var i = 0; i < arrayBitacoras.length; i++) {
-    var descripcionText = arrayBitacorasDescripciones[i];
+    descripcionText = arrayBitacorasDescripciones[i];
     if (i == 0) {
       salidaTab += '<div role="tabpanel" class="tab-pane fade active in" id="'+descripcionText+'" aria-labelledby="home-tab">';
     }else{
@@ -93,6 +104,7 @@ function siRespuestacargarSubBitacora(r){
   salidaTab += '<tbody>';                
   for (var i = 0; i < doc.length; i++) {
         var obj = doc[i];
+        console.log(obj)
         salidaTab += '<tr><td>'+obj.descripcion+'</td><td>'+obj.porcentaje+'%</td>';
         salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="location.href='+"'actualizarPorcentajeBrujula.html'"+'>Actualizar</button></div></td>';
         salidaTab += '</tr>';                

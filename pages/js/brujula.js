@@ -26,6 +26,8 @@ function sleep(ms) {
 }
 
 function cargarBitacoras(){
+  console.log(numIdentificacion);
+  console.log(tipoUso);
   var parametros = {
           opcion : "cargarBitacoraPersona",
           tipoUso : tipoUso,
@@ -42,23 +44,30 @@ function cargarBitacoras(){
 
 function siRespuestacargarBitacoras(r){
   var doc = JSON.parse(r);
-  var salida = '<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">';                   
+  //var salida = '<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">';  
+  var salida = "";                 
   $("#myTab").html("");
   for (var i = 0; i < doc.length; i++) {
         var obj = doc[i];
-        salida += '<li role="presentation" class="active"><a href="#'+obj.descripcion+'" id="'+obj.descripcion+'-tab" role="tab" data-toggle="tab" aria-expanded="true">'+obj.descripcion+'</a></li>';
+        if (i == 0) {
+          salida += '<li role="presentation" class="active"><a href="#'+obj.descripcion+'" id="'+obj.descripcion+'-tab" role="tab" data-toggle="tab" aria-expanded="true">'+obj.descripcion+'</a></li>';
+        }else{
+          salida += '<li role="presentation" class=""><a href="#'+obj.descripcion+'" role="tab" id="'+obj.descripcion+'-tab" data-toggle="tab" aria-expanded="false">'+obj.descripcion+'</a>'
+        };
         arrayBitacoras[i] = obj.idBitacoraXTipoBitacora;
         arrayBitacorasPorcentajes[i] = obj.porcentaje;
         arrayBitacorasDescripciones[i] = obj.descripcion;
   }
-  salida += "</ul>";
+  //salida += "</ul>";
   $("#myTab").html(salida);
 }
 
-function cargarSubBitacoras(){
+async function cargarSubBitacoras(){
+  salidaTab = "";
   $("#myTabContent").html("");
-  var salidaTab = '<div id="myTabContent" class="tab-content">';  
+  //var salidaTab = '<div id="myTabContent" class="tab-content">';  
   for (var i = 0; i < arrayBitacoras.length; i++) {
+  //var i = 0;
     descripcionText = arrayBitacorasDescripciones[i];
     if (i == 0) {
       salidaTab += '<div role="tabpanel" class="tab-pane fade active in" id="'+descripcionText+'" aria-labelledby="home-tab">';
@@ -74,14 +83,18 @@ function cargarSubBitacoras(){
     salidaTab += '<div class="clearfix"></div>';
     salidaTab += '</div>';
     cargarSubBitacora(i);
+    console.log("voy a esperar");
+    await sleep(5000);
     salidaTab += '</div></div></form></div></div>';
   };
-  salidaTab += '</div>';
+  //salidaTab += '</div>';
+  console.log(salidaTab);
   $("#myTabContent").html(salidaTab);
 }
 
 function cargarSubBitacora(currentTab){
   var idBitacora = arrayBitacoras[currentTab];
+  console.log(idBitacora);
   var parametros = {
           opcion : "cargarSubBitacoraPersona",
           tipoUso : tipoUso,
@@ -106,7 +119,7 @@ function siRespuestacargarSubBitacora(r){
         var obj = doc[i];
         console.log(obj)
         salidaTab += '<tr><td>'+obj.descripcion+'</td><td>'+obj.porcentaje+'%</td>';
-        salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="location.href='+"'actualizarPorcentajeBrujula.html'"+'>Actualizar</button></div></td>';
+        salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="location.href='+"'actualizarPorcentajeBrujula.html'"+'">Actualizar</button></div></td>';
         salidaTab += '</tr>';                
   }
   salidaTab += "</tbody></table>";            

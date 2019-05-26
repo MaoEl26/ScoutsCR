@@ -64,7 +64,7 @@ function siRespuestacargarBitacoras(r){
 
 async function cargarSubBitacoras(){
   salidaTab = "";
-  $("#myTabContent").html("");
+  //$("#myTabContent").html("");
   //var salidaTab = '<div id="myTabContent" class="tab-content">';  
   for (var i = 0; i < arrayBitacoras.length; i++) {
   //var i = 0;
@@ -89,6 +89,7 @@ async function cargarSubBitacoras(){
   };
   //salidaTab += '</div>';
   console.log(salidaTab);
+  $("#myTabContent").html("");
   $("#myTabContent").html(salidaTab);
 }
 

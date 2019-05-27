@@ -155,10 +155,3 @@ function actualizar(button){ //--- ACCION DEL BOTÓN
   localStorage.setItem("idTipoAreaXBitacoraTipoBitacora",value);
   setTimeout("location.href='actualizarPorcentajeBrujula.html'",0);
 }
-
-function siRespuesta(r){
-    alert(r);
-    cargarTablaEspecialidades();
-    cargarEspecialidades();
-    cargarNombre();
-}

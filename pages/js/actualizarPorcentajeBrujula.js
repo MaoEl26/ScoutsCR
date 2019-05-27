@@ -9,14 +9,13 @@ function limpiar(){
   document.getElementById('txtPorcentaje').value = "";
 }
 
-function actualizarPorcentajeSubBitacora(button){
-  
-  var id = button.value;
+function actualizarPorcentajeSubBitacora(){
+    
     console.log(id);
     var parametros = {
         opcion : "actualizarPorcentajeSubBitacora",
-        id : id,
-        txtNombre: $('#txtNombre').val(),,
+        id : identificacion,
+        porcentaje: $('#txtPorcentaje').val(),
     };
 
     // Realizar la petición

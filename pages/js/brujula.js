@@ -8,8 +8,6 @@ var tipoUso = 1;
 var salidaTab = "";
 var descripcionText = "";
 
-var arrayEspecialidad = [];
-var arrayEspecialidadPersona = [];
 var arrayBitacoras = [];
 var arrayBitacorasPorcentajes = [];
 var arrayBitacorasDescripciones = [];
@@ -120,28 +118,10 @@ function siRespuestacargarSubBitacora(r){
         var obj = doc[i];
         console.log(obj)
         salidaTab += '<tr><td>'+obj.descripcion+'</td><td>'+obj.porcentaje+'%</td>';
-        salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="location.href='+"'actualizarPorcentajeBrujula.html'"+'">Actualizar</button></div></td>';
+        salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="actualizar(this)"'+'">Actualizar</button></div></td>';
         salidaTab += '</tr>';                
   }
   salidaTab += "</tbody></table>";            
-}
-
-function agregarEspecialidadPersona(){
-	
-	var id = arrayEspecialidad[document.getElementById('cbEspecialidad').selectedIndex];
-      console.log(id);
-      var parametros = {
-          opcion : "agregarEspecialidadPersona",
-          id : id,
-          idPersona: numIdentificacion
-      };
-
-      // Realizar la petición
-      var post = $.post(
-                            "php/mysql.php",    // Script que se ejecuta en el servidor
-                            parametros,                              
-                            siRespuesta    // Función que se ejecuta cuando el servidor responde
-                            );  
 }
 
 function cargarNombre(){
@@ -168,47 +148,6 @@ function siRespuestacargarNombre(r){
     }
   label += '</label>';
   $("#lblNombre").html(label);
-}
-
-
-function cargarTablaEspecialidades(){
-	var parametros = {
-		opcion : "cargarTablaEspecialidades",
-		id: numIdentificacion
-	}
-
-	var post = $.post(
-                         "php/mysql.php",    // Script que se ejecuta en el servidor
-	                     parametros,    	                       
-	                     siRespuestacargarTabla    // Función que se ejecuta cuando el servidor responde
-                         );
-}
-
-function siRespuestacargarTabla(r){
-	var doc = JSON.parse(r);
-	var salida = '<table class="table table-striped" id="tblEspecialidades"><thead><tr><th>Especialidad</th>';
-	salida+='<th>Nuevo Reto</th><th>Listado Retos</th></tr></thead><tbody>';
-              
-  $("#tblEspecialidades").html("");
-  for (var i = 0; i < doc.length; i++) {
-        var j = i;
-        var obj = doc[i];
-        salida +='<tr value="'+i+'">'
-        salida += '<td>'+obj.descripcion+'</td>';
-        salida += '<td>'+'<div class="btn-group">'+
-        '<button type="button" class="btn btn-round btn-primary btn-xs"'
-        +'value="'+obj.idTipoEspecialidadXPersona+'" onclick="almacenarReto(this);">'+
-        'Agregar'+'</button>'+'</div></td>';
-        salida += '<td>'+'<div class="btn-group">'+
-        '<button type="button" class="btn btn-round btn-primary btn-xs"'
-        +'value="'+obj.idTipoEspecialidadXPersona+'" onclick="listaRetos(this);">'+
-        'Ver'+'</button>'+'</div></td>';
-        arrayEspecialidadPersona[i] = obj.idTipoEspecialidadXPersona;
-        salida +='</tr>'
-        
-    }
-    salida += "</tbody></table>";
-    $("#tblEspecialidades").html(salida);
 }
 
 function actualizar(button){ //--- ACCION DEL BOTÓN

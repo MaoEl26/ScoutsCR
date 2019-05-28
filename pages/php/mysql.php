@@ -608,17 +608,17 @@ switch ($opcion) {
 
 	case 'actualizarPorcentajeSubBitacora':
 		$id = $_POST['id'];
-		$nombre = $_POST['txtNombre'];
+		$porcentaje = $_POST['porcentaje'];
 		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
-		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
-		if(!$mysqli->query("CALL actualizarPorcentajeSubBitacora(@id,@nombre)"))
+		$mysqli->query("SET @porcentaje  = " . "'" . $mysqli->real_escape_string($porcentaje) . "'");
+		if(!$mysqli->query("CALL actualizarPorcentajeSubBitacora(@id,@porcentaje)"))
 		{
     		if($mysqli) $mysqli->close(); // Close DB connection
     		header('HTTP/1.1 400 Es posible que la vacuna ya exista');
     		die();
 		}
 		if($mysqli) $mysqli->close();
-		echo "Miembro Promocionado";
+		echo "Porcentaje actualizado";
 	break;
 
 	case 'cargarTablaMiembros':

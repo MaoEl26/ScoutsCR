@@ -69,6 +69,7 @@ async function cargarSubBitacoras(){
   for (var i = 0; i < arrayBitacoras.length; i++) {
   //var i = 0;
     descripcionText = arrayBitacorasDescripciones[i];
+    var progreso = arrayBitacorasPorcentajes[i]
     if (i == 0) {
       salidaTab += '<div role="tabpanel" class="tab-pane fade active in" id="'+descripcionText+'" aria-labelledby="home-tab">';
     }else{
@@ -79,8 +80,20 @@ async function cargarSubBitacoras(){
     salidaTab += '<div class="form-group">';
     salidaTab += '<div class="panel-body">';
     salidaTab += '<div class="x_title">';
-    salidaTab += '<label id="lblPorcentaje'+descripcionText+'"><h2>Completado: '+arrayBitacorasPorcentajes[i]+'%</h2></label>';
-    salidaTab += '<div class="progress"><div class="progress-bar progress-bar-success" data-transitiongoal="'+arrayBitacorasPorcentajes[i]+'" aria-valuenow="'+arrayBitacorasPorcentajes[i]+'" style="width: '+arrayBitacorasPorcentajes[i]+'%;"></div></div>'
+    salidaTab += '<label id="lblPorcentaje'+descripcionText+'"><h2>Completado: '+progreso+'%</h2></label>';
+    if (progreso < 25) {
+      salidaTab += '<div class="progress"><div class="progress-bar progress-bar-danger" data-transitiongoal="'+progreso+'" aria-valuenow="'+progreso+'" style="width: '+progreso+'%;"></div></div>'
+    }else{  
+      if (progreso < 50) {
+        salidaTab += '<div class="progress"><div class="progress-bar progress-bar-warning" data-transitiongoal="'+progreso+'" aria-valuenow="'+progreso+'" style="width: '+progreso+'%;"></div></div>'
+      }else{
+        if (progreso < 75) {
+          salidaTab += '<div class="progress"><div class="progress-bar progress-bar-info" data-transitiongoal="'+progreso+'" aria-valuenow="'+progreso+'" style="width: '+progreso+'%;"></div></div>'
+        }else{
+          salidaTab += '<div class="progress"><div class="progress-bar progress-bar-success" data-transitiongoal="'+progreso+'" aria-valuenow="'+progreso+'" style="width: '+progreso+'%;"></div></div>'
+        };
+      };
+    };
     salidaTab += '<div class="clearfix"></div>';
     salidaTab += '</div>';
     cargarSubBitacora(i);

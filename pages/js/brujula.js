@@ -80,6 +80,7 @@ async function cargarSubBitacoras(){
     salidaTab += '<div class="panel-body">';
     salidaTab += '<div class="x_title">';
     salidaTab += '<label id="lblPorcentaje'+descripcionText+'"><h2>Completado: '+arrayBitacorasPorcentajes[i]+'%</h2></label>';
+    salidaTab += '<div class="progress"><div class="progress-bar progress-bar-success" data-transitiongoal="'+arrayBitacorasPorcentajes[i]+'" aria-valuenow="'+arrayBitacorasPorcentajes[i]+'" style="width: '+arrayBitacorasPorcentajes[i]+'%;"></div></div>'
     salidaTab += '<div class="clearfix"></div>';
     salidaTab += '</div>';
     cargarSubBitacora(i);

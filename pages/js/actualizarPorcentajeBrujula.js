@@ -11,11 +11,11 @@ function limpiar(){
 
 function actualizarPorcentajeSubBitacora(){
     
-    console.log(id);
+    
     var parametros = {
         opcion : "actualizarPorcentajeSubBitacora",
         id : identificacion,
-        porcentaje: $('#txtPorcentaje').val(),
+        porcentaje: $('#txtPorcentaje').val()
     };
 
     // Realizar la petición

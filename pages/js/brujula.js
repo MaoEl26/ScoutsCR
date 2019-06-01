@@ -11,21 +11,32 @@ var descripcionText = "";
 var arrayBitacoras = [];
 var arrayBitacorasPorcentajes = [];
 var arrayBitacorasDescripciones = [];
-
+var arraySubBitacorasPorcentajes = [0,0,0,0,0,0,0];
+var control = 0;
+var cantidadSubBitacoras = 0;
 
 async function controladora(){
   cargarBitacoras();
-  await sleep(5000);
+  await sleep(2000);
   cargarSubBitacoras();
+  await sleep(5000);
+  actualizarPorcentaje();
 }
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function actualizarPorcentaje(){
+  for (var i = 0; i < arrayBitacoras.length; i++) {
+    arrayBitacorasPorcentajes[i] = (arraySubBitacorasPorcentajes[i]/cantidadSubBitacoras);
+  }
+
+  console.log(arrayBitacorasPorcentajes);
+  console.log(control);
+}
+
 function cargarBitacoras(){
-  console.log(numIdentificacion);
-  console.log(tipoUso);
   var parametros = {
           opcion : "cargarBitacoraPersona",
           tipoUso : tipoUso,
@@ -95,19 +106,16 @@ async function cargarSubBitacoras(){
     salidaTab += '<div class="clearfix"></div>';
     salidaTab += '</div>';
     cargarSubBitacora(i);
-    console.log("voy a esperar");
-    await sleep(5000);
+    await sleep(1000);
     salidaTab += '</div></div></form></div></div>';
   };
   //salidaTab += '</div>';
-  console.log(salidaTab);
   $("#myTabContent").html("");
   $("#myTabContent").html(salidaTab);
 }
 
 function cargarSubBitacora(currentTab){
   var idBitacora = arrayBitacoras[currentTab];
-  console.log(idBitacora);
   var parametros = {
           opcion : "cargarSubBitacoraPersona",
           tipoUso : tipoUso,
@@ -127,14 +135,17 @@ function siRespuestacargarSubBitacora(r){
   var doc = JSON.parse(r);
   salidaTab += '<table class="table table-striped" id="tbl'+descripcionText+'">';
   salidaTab += '<thead><tr><th>Area</th><th>Porcentaje</th><th>Actualizar</th></tr></thead>'; 
-  salidaTab += '<tbody>';                
+  salidaTab += '<tbody>';
+                 
   for (var i = 0; i < doc.length; i++) {
         var obj = doc[i];
-        console.log(obj)
         salidaTab += '<tr><td>'+obj.descripcion+'</td><td>'+obj.porcentaje+'%</td>';
         salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="actualizar(this)"'+'">Actualizar</button></div></td>';
-        salidaTab += '</tr>';                
+        salidaTab += '</tr>';
+        cantidadSubBitacoras = doc.length;
+        arraySubBitacorasPorcentajes[control]+=Number(obj.porcentaje);               
   }
+  control+=1;
   salidaTab += "</tbody></table>";            
 }
 

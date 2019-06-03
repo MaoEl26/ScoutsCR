@@ -17,11 +17,50 @@ async function controladora(){
   cargarBitacoras();
   await sleep(5000);
   cargarSubBitacoras();
+  await sleep(5000);
+  actualizarPorcentaje();
 }
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+async function actualizarPorcentaje(){
+  for (var i = 0; i < arrayBitacoras.length; i++) {
+    arrayBitacorasPorcentajes[i] = (arraySubBitacorasPorcentajes[i]/cantidadSubBitacoras);
+  }
+
+  console.log(arrayBitacorasPorcentajes);
+  console.log(control);
+
+  for (var i = 0; i < arrayBitacoras.length; i++) {
+    indiceUso = arrayBitacoras[i];
+    porcentajeUso = arrayBitacorasPorcentajes[i];
+    console.log(porcentajeUso);
+    actualizarPorcentajeBrujula();
+    await sleep(500);
+  }  
+}
+
+function actualizarPorcentajeBrujula(){
+  var parametros = {
+    opcion : "actualizarPorcentajeBitacora",
+    id : indiceUso,
+    porcentaje : porcentajeUso
+  };
+
+  var post = $.post(
+                        "php/mysql.php",    // Script que se ejecuta en el servidor
+                        parametros,                              
+                        siActualizarPorcentajeBitacora    // Función que se ejecuta cuando el servidor responde
+                        );
+
+}
+
+function siActualizarPorcentajeBitacora(r){
+  console.log("actualizado");
+}
+
 
 function cargarBitacoras(){
   console.log(numIdentificacion);

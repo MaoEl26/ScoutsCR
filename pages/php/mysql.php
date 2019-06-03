@@ -387,6 +387,17 @@ switch ($opcion) {
 		echo json_encode($json) ;
 	break;
 
+	case  'cargarTablaRetos':
+		$id = $_POST['id'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$resultado = $mysqli->query("CALL cargarRetoBitacora(@id)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
 	case  'cargarEnfermedades':
 		$resultado = $mysqli->query("CALL cargarEnfermedades()");
 		$json = array();
@@ -615,6 +626,21 @@ switch ($opcion) {
 		{
     		if($mysqli) $mysqli->close(); // Close DB connection
     		header('HTTP/1.1 400 Es posible que la vacuna ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Porcentaje actualizado";
+	break;
+
+	case 'actualizarPorcentajeBitacora':
+		$id = $_POST['id'];
+		$porcentaje = $_POST['porcentaje'];
+		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
+		$mysqli->query("SET @porcentaje  = " . "'" . $mysqli->real_escape_string($porcentaje) . "'");
+		if(!$mysqli->query("CALL actualizarPorcentajeBitacora(@id,@porcentaje)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el valor ya exista');
     		die();
 		}
 		if($mysqli) $mysqli->close();

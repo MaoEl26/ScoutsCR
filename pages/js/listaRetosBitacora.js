@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    //cargarTablaRetosEspecialidad();
+    cargarTablaRetos();
     cargarNombre();
 });
 
@@ -34,7 +34,7 @@ function siRespuestacargarNombre(r){
   $("#lblNombre").html(label);
 }
 
-function cargarTablaRetosEspecialidad(){
+function cargarTablaRetos(){
 	var parametros = {
 		opcion : "cargarTablaRetos",
 		id: identificacion

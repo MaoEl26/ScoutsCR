@@ -28,6 +28,15 @@ $opcion = $_POST['opcion'];
 
 switch ($opcion) {
 
+	case  'cargarTiposUsuario':
+		$resultado = $mysqli->query("CALL cargarTiposUsuario()");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
 	case  'obtenerPass':
 		$userName = $_POST['userName'];
 		$mysqli->query("SET @userName  = " . "'" . $mysqli->real_escape_string($userName) . "'");
@@ -51,6 +60,16 @@ switch ($opcion) {
 		$idPersona = $_POST['idPersona'];
 		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
 		$resultado = $mysqli->query("CALL obtenerIdFicha (@idPersona)");
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'obtenerIdBitacora':
+		$idPersona = $_POST['idPersona'];
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		$resultado = $mysqli->query("CALL obtenerIdBitacora (@idPersona)");
 		while($row = $resultado->fetch_array()){
 			$json[] = $row;
 		}
@@ -194,6 +213,25 @@ switch ($opcion) {
 		}
 		if($mysqli) $mysqli->close();
 		echo "Persona agregada";
+	break;
+
+	case 'agregarUsuario':
+		$usuario = $_POST['usuario'];
+		$pass = $_POST['pass'];
+		$idTipo = $_POST['idTipo'];
+		$idPersona = $_POST['idPersona'];
+		$mysqli->query("SET @usuario  = " . "'" . $mysqli->real_escape_string($usuario) . "'");
+		$mysqli->query("SET @pass  = " . "'" . $mysqli->real_escape_string($pass) . "'");
+		$mysqli->query("SET @idTipo  = " . "'" . $mysqli->real_escape_string($idTipo) . "'");
+		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
+		if(!$mysqli->query("CALL agregarUsuario (@usuario,@pass,@idTipo,@idPersona)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el usuario ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Usuario agregada";
 	break;
 
 	case 'agregarMiembroJuvenil':
@@ -992,6 +1030,21 @@ switch ($opcion) {
 		echo "Bitacora agregada";
 	break;
 
+	case 'agregarSubBitacora':
+		$idBitacora = $_POST['idBitacora'];
+		$tipoBitacora = $_POST['tipoBitacora'];
+		$mysqli->query("SET @idBitacora  = " . "'" . $mysqli->real_escape_string($idBitacora) . "'");
+		$mysqli->query("SET @tipoBitacora  = " . "'" . $mysqli->real_escape_string($tipoBitacora) . "'");
+		if(!$mysqli->query("CALL agregarSubBitacora(@idBitacora,@tipoBitacora)"))
+		{
+    		if($mysqli) $mysqli->close(); // Close DB connection
+    		header('HTTP/1.1 400 Es posible que el nivel ya exista');
+    		die();
+		}
+		if($mysqli) $mysqli->close();
+		echo "Nivel de Bitacora agregado";
+	break;
+
 	case 'agregarBitacoraPersona':
 		$id = $_POST['Identificacion'];
 		$nivel = $_POST['nivel'];
@@ -1043,6 +1096,15 @@ switch ($opcion) {
 		$mysqli->query("SET @idPersona  = " . "'" . $mysqli->real_escape_string($idPersona) . "'");
 		$mysqli->query("SET @idBitacora  = " . "'" . $mysqli->real_escape_string($idBitacora) . "'");
 		$resultado = $mysqli->query("CALL cargarSubBitacora(@idPersona,@tipoUso,@idBitacora)");
+		$json = array();
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
+	case  'cargarTiposBitacora':
+		$resultado = $mysqli->query("CALL cargarTiposBitacora()");
 		$json = array();
 		while($row = $resultado->fetch_array()){
 			$json[] = $row;

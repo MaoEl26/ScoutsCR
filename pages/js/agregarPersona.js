@@ -8,9 +8,10 @@ $( document ).ready(function() {
     cargarNiveles();
     cargarProvinciasResponsable();
     cargarCargos();
+    cargarTiposBitacora();
     document.getElementById('lblCargos').style.display = "none";
     document.getElementById('cbCargos').style.display = "none";
-    document.getElementById('btnAgregar').style.display = "none";
+    document.getElementById('btnAgregar').style.display = "none"; 
 });
 
 //var infoMiembroAdulto = '<div class="x_title"><h2>Informacion miembro adulto<small></small></h2><div class="clearfix"></div></div><div class="x_content"><br /><form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"><div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12">Cargos que desempeña </label><div class="col-md-6 col-sm-6 col-xs-12"<select class="form-control" id="cbCargos"></select></div></div> <div class="ln_solid"></div><div class="form-group"><div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"></div></div></form></div><button type="submit" class="btn btn-success" onclick="agregarPersona();">Agregar</button>'
@@ -29,9 +30,13 @@ var arrayNivel = [];
 var arrayCantonesResponsable = [];
 var arrayDistritosResponsable = [];
 
+var arrayTiposBitacora = [];
+
 var tipoMiembro = 1;
 var genero = 0;
 var cargo = 0;
+
+var idBitacora = 0;
 
 var Niveles = [];
 var SubNiviles =[];
@@ -464,6 +469,7 @@ function agregar(){
         console.error("Miembro adulto");
         agregarMiembroAdulto(); 
     };
+    agregarBitacora();
 }
 
 function agregarMiembroJuvenil(){
@@ -520,7 +526,6 @@ function agregarResponsable(){
 
 function siRespuestaagregarResponsable(r){
     console.log("Responsable agregado");
-    agregarBitacoraBrujula();
 }
 
 function agregarMiembroAdulto () {
@@ -544,7 +549,28 @@ function siRespuestaagregarMiembroAdulto(r){
 }
 
 //---------------------------------------------------------------------------------------------------
-function agregarBitacoraBrujula(){
+function cargarTiposBitacora(){
+    var parametros = {
+        opcion : "cargarTiposBitacora"
+    };
+
+    // Realizar la petición
+    var post = $.post(
+                        "php/mysql.php",    // Script que se ejecuta en el servidor
+                        parametros,                              
+                        siRespuestacargarTiposBitacora    // Función que se ejecuta cuando el servidor responde
+                        );  
+}
+
+function siRespuestacargarTiposBitacora(r){
+    var doc = JSON.parse(r);
+    for (var i = 0; i < doc.length; i++) {
+        var obj = doc[i];
+        arrayTiposBitacora[i] = obj.idTipoBitacora;
+    }
+}
+
+function agregarBitacora(){
     var parametros = {
         opcion: "agregarBitacora",
         Identificacion: $('#txtIdentificacion').val()
@@ -553,20 +579,57 @@ function agregarBitacoraBrujula(){
     var post = $.post(
                           "php/mysql.php",    // Script que se ejecuta en el servidor
                           parametros,                              
-                          siRespuestaCrearBitacoraBrujula  // Función que se ejecuta cuando el servidor responde
+                          siRespuestaCrearBitacora   // Función que se ejecuta cuando el servidor responde
                           ); 
 }
 
-function siRespuestaCrearBitacoraBrujula(r){
-    console.log("bitacora agregada");
+function siRespuestaCrearBitacora(r){
+    obtenerIdBitacora();
 
+}
+
+function obtenerIdBitacora(){
+    var idPersona = document.getElementById('txtIdentificacion').value  
     var parametros = {
-        opcion: "cargarNivelesBrujula"
+        opcion: "obtenerIdBitacora",
+        Identificacion: idPersona
     };
 
-    var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
-                        parametros,                              
-                        siRespuestaCargarNivelesBrujula);
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuestaobtenerIdBitacora   // Función que se ejecuta cuando el servidor responde
+                          ); 
+}
+
+function siRespuestaobtenerIdBitacora(r){
+    var doc = JSON.parse(r);
+    var obj = doc[0];
+    idBitacora = obj.idBitacora;
+}
+
+function agregarBitacoras(){
+    for (var i = 0; i < arrayTiposBitacora.length; i--) {
+        agregarSubBitacora(arrayTiposBitacora[i]);
+    };
+}
+
+function agregarSubBitacora(int tipoBitacora){
+    var parametros = {
+        opcion: "agregarSubBitacora",
+        idBitacora: idBitacora,
+        tipoBitacora: tipoBitacora   
+    };
+
+    var post = $.post(
+                          "php/mysql.php",    // Script que se ejecuta en el servidor
+                          parametros,                              
+                          siRespuestaagregarSubBitacora   // Función que se ejecuta cuando el servidor responde
+                          ); 
+}
+
+function siRespuestaagregarSubBitacora(r){
+    consol.log("Sub agregada");
 }
 
 function siRespuestaCargarNivelesBrujula(r){
@@ -628,30 +691,10 @@ function agregarSubnivelesBrujula(){
         }
 }
 // ------------------------------------------------------------------------------------
-function agregarBitacora(){
-    var parametros = {
-        opcion: "agregarBitacora",
-        Identificacion: $('#txtIdentificacion').val()
-    };
 
-    var post = $.post(
-                          "php/mysql.php",    // Script que se ejecuta en el servidor
-                          parametros,                              
-                          siRespuestaCrearBitacora   // Función que se ejecuta cuando el servidor responde
-                          ); 
-}
 
-function siRespuestaCrearBitacora(r){
-    console.log("Adulto agregado");
 
-    var parametros = {
-        opcion: "cargarNivelesBitacora"
-    };
 
-    var post = $.post( "php/mysql.php",    // Script que se ejecuta en el servidor
-                        parametros,                              
-                        siRespuestaCargarNivelesBitacora);
-}
 
 function siRespuestaCargarNivelesBitacora(r){
     Niveles =JSON.parse(r);

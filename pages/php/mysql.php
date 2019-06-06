@@ -28,6 +28,16 @@ $opcion = $_POST['opcion'];
 
 switch ($opcion) {
 
+	case  'obtenerPass':
+		$userName = $_POST['userName'];
+		$mysqli->query("SET @userName  = " . "'" . $mysqli->real_escape_string($userName) . "'");
+		$resultado = $mysqli->query("CALL obtenerPass (@userName)");
+		while($row = $resultado->fetch_array()){
+			$json[] = $row;
+		}
+		echo json_encode($json) ;
+	break;
+
 	case  'cargarTiposSangre':
 		$resultado = $mysqli->query("CALL cargarTiposSangre()");
 		$json = array();

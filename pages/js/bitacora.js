@@ -12,6 +12,12 @@ var arrayBitacoras = [];
 var arrayBitacorasPorcentajes = [];
 var arrayBitacorasDescripciones = [];
 
+var arraySubBitacorasPorcentajes = [0,0,0,0,0,0,0,0];
+var control = 0;
+var cantidadSubBitacoras = 0;
+
+var indiceUso;
+var porcentajeUso;
 
 async function controladora(){
   cargarBitacoras();
@@ -159,8 +165,11 @@ function siRespuestacargarSubBitacora(r){
         salidaTab += '<tr><td>'+obj.descripcion+'</td><td>'+obj.porcentaje+'%</td>';
         salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="almacenarReto(this)"'+'">Agregar</button></div></td>';
         salidaTab += '<td><div class="btn-group"><button type="button" class="btn btn-round btn-primary btn-xs" value="'+obj.idTipoAreaXBitacoraTipoBitacora+'" onclick="listaRetos(this)"'+'">Ver</button></div></td>';
-        salidaTab += '</tr>';                
+        salidaTab += '</tr>';
+        cantidadSubBitacoras = doc.length;
+        arraySubBitacorasPorcentajes[control]+=Number(obj.porcentaje);               
   }
+  control+=1;
   salidaTab += "</tbody></table>";            
 }
 

@@ -386,12 +386,12 @@ switch ($opcion) {
 		$nombre = $_POST['nombre'];
 		$fecha = $_POST['fecha'];
 		$porcentaje = $_POST['porcentaje'];
-		$idEspecialidad = $_POST['id'];
+		$id = $_POST['id'];
 		$mysqli->query("SET @nombre  = " . "'" . $mysqli->real_escape_string($nombre) . "'");
 		$mysqli->query("SET @fecha  = " . "'" . $mysqli->real_escape_string($fecha) . "'");
-		$mysqli->query("SET @condicion  = " . "'" . $mysqli->real_escape_string($condicion) . "'");
+		$mysqli->query("SET @condicion  = " . "'" . $mysqli->real_escape_string($porcentaje) . "'");
 		$mysqli->query("SET @id  = " . "'" . $mysqli->real_escape_string($id) . "'");
-		if(!$mysqli->query("CALL agregarRetoEspecialidad(@nombre,@fecha,@condicion,@id)"))
+		if(!$mysqli->query("CALL agregarRetoBitacora(@nombre,@fecha,@condicion,@id)"))
 		{
     		if($mysqli) $mysqli->close(); // Close DB connection
     		header('HTTP/1.1 400 Es posible que la enfermedad ya exista');

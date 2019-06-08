@@ -19,6 +19,7 @@ function cargarPersonas(){
 }
 
 function siRespuestacargarPersonas(r){
+	console.log(r);
 	var doc = JSON.parse(r);
 	var salida = '<select class="form-control" tabindex="-1" id="sPersona">';                   
 	$("#cbPersona").html("");

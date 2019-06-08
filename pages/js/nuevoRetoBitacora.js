@@ -18,12 +18,12 @@ function sleep(ms) {
 }
 
 function agregarRetoBitacora(){
-
+console.log("Agregando");
       var parametros = {
           opcion : "agregarRetoBitacora",
           nombre : $('#txtNombre').val(),
           fecha: $('#single_cal2').val(),
-          Porcentaje: $('#txtPorcentaje').val(),
+          porcentaje: $('#txtPorcentaje').val(),
           id : identificacion
       };
 
@@ -33,7 +33,6 @@ function agregarRetoBitacora(){
                             parametros,                              
                             siRespuesta    // Función que se ejecuta cuando el servidor responde
                             );  
-      console.log($('#txtFecha').val());
 }
 
 function cargarNombre(){
@@ -67,7 +66,7 @@ function cargarTablaRetos(){
     opcion : "cargarTablaRetos",
     id: identificacion
   }
-
+  console.log("Cargando");
   var post = $.post(
                          "php/mysql.php",    // Script que se ejecuta en el servidor
                        parametros,                             
@@ -82,6 +81,7 @@ function siRespuestacargarTabla(r){
         porcentajeSalida+= Number(obj.porcentaje);       
   }
   porcentajeSalida = porcentajeSalida/doc.length;
+  console.log(porcentajeSalida);
 }
 
 function actualizarPorcentajeSubBitacora(){   
@@ -103,11 +103,18 @@ function siRespuestaSalida(r){
   console.log("actualizado");
 }
 
-async function siRespuesta(r){
-    limpiar();
-    alert(r);
-    cargarNombre();
+async function cargar(){
+    console.log("cargar");
     cargarTablaRetos();
     await sleep(1000);
     actualizarPorcentajeSubBitacora();
+    await sleep(1000)
+}
+
+function siRespuesta(r){
+    console.log("siRespuesta")
+    limpiar();
+    alert(r);
+    cargarNombre(); 
+    cargar();
 }
